@@ -1,0 +1,49 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+        <div class="page-title-area item-bg3" style="background-image: url({% static 'new_front/assets/images/about_us.jpg' %})">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>Franchise</h2>
+                            <ul>
+                                <li>Call or email us today to get started</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services-details-area ptb-100">
+            <div class="container">
+                <div class="services-details-overview">
+                    <div class="services-details-desc">
+                        <h3>Our Franchise Program</h3>
+                        <p style="text-align: justify">
+                            Enterprise Hubs is an integrated network of online and physical resource centers for
+                            emerging enterprises in Africa’s growth clusters.<br />
+                            A platform for promotion of emerging businesses across Africa, offering shared services,
+                            virtual offices, contemporary business hubs, online B2B marketplace,
+                            business support services and a complete suite of enterprise development programs
+                            and resources. <br /> A system that’s redefining the way people work, innovate and grow.
+                        </p>
+                        <div class="features-text">
+                            <p>Joining our partner or franchisee program offers you a strong position in a fast-growing
+                                industry with a particularly strong future outlook in Africa.</p>
+                        </div>
+                    </div>
+                    <div class="services-details-image">
+                        <img src="{% static 'new_front/assets/images/about_us_3.jpg' %}" alt="image" />
+                    </div>
+                </div>
+                <div>
+                    <a href="mailto:info@enterprisehubs.com?cc=dozie@pedestalafrica.com&subject=Enterprise Hubs franchise enquiry&body=Hi <name>, %0D%0D I will like to know more about your franchise program ...." class="btn btn-danger text-white">Get Started</a>
+                </div>
+
+            </div>
+        </section>
+
+{% endblock main %}

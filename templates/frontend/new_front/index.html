@@ -1,0 +1,235 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+    <div class="home-area home-slides owl-carousel owl-theme">
+        <div class="main-banner" style="background-image: url({% static 'new_front/assets/images/slider/slider1.jpg' %});">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="main-banner-content">
+                            <span class="sub-title">Enterprise Hubs is an integrated network of online
+                            and physical resource centers <br />for emerging entrepreneurs and businesses..</span>
+                            <h1>Where entrepreneurs go<br /> to grow</h1>
+                            <div class="btn-box">
+                                <a href="{% url 'service_page' %}" class="default-btn">Explore<span></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-banner" style="background-image: url({% static 'new_front/assets/images/slider/slider2.jpg' %});">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="main-banner-content">
+                            <span class="sub-title">Enterprise Hubs is an integrated network of online
+                            and physical resource centers <br />for emerging entrepreneurs and businesses..</span>
+                            <h1>Where entrepreneurs go<br /> to grow</h1>
+                            <div class="btn-box">
+                                <a href="{% url 'service_page' %}" class="default-btn">Explore<span></span></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-banner" style="background-image: url({% static 'new_front/assets/images/slider/slider3.jpg' %});">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="main-banner-content">
+                            <span class="sub-title">Enterprise Hubs is an integrated network of online
+                            and physical resource centers <br />for emerging entrepreneurs and businesses..</span>
+                            <h1>Where entrepreneurs go<br /> to grow</h1>
+                            <div class="btn-box">
+                                <a href="{% url 'service_page' %}" class="default-btn">Explore<span></span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{#    <div id="myModal" class="modal fade">#}
+{#        <div class="modal-dialog">#}
+{#            <div class="modal-content">#}
+{#                <div class="modal-header">#}
+{#                    <h5 class="modal-title">Good News!!!</h5>#}
+{#                    <button type="button" class="close" data-dismiss="modal">&times;</button>#}
+{#                </div>#}
+{#                <div class="modal-body">#}
+{#                    <p>Enterprise Hubs now in KANO</p>#}
+{#                    <p class="fa fa-map-marker"> 14, Ibrahim Dabo Road, Tarauni G.R.A, Kano State.</p>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+
+    <section class="about-area ptb-100">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-title">
+                        <span>About Us</span>
+                        <h2>A system that is redefining the way we live, work and learn.</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="about-text">
+                        <p class="justify">
+                            Enterprise Hubs owned by Pedestal Africa Limited is an integrated network of online and
+                            physical resource centres for emerging enterprises in Nigeria and beyond.
+                            A platform for promotion of businesses across Africa, offering shared workspaces,
+                            virtual offices, contemporary business hubs, online B2B marketplace,
+                            business support services and a complete suite of enterprise development services.
+                        </p>
+                        <a href="{% url 'about_page' %}" class="read-more-btn">More About Us <i class="flaticon-next"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="why-choose-us-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-5 col-md-12">
+                    <div class="why-choose-us-image">
+                        <img src="{% static 'new_front/assets/images/why_choose_us.jpg' %}" alt="image" />
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-12">
+                    <div class="why-choose-us-content">
+                        <div class="content">
+                            <span class="sub-title">Your Benefits</span>
+                            <h2>Why Choose Us</h2>
+                            <p>
+                                Enterprise Hubs has built a system to unleash collaboration, creativity and inspiration
+                                from passionate entrepreneurs and business people, most especially a community that
+                                promotes learning, collaboration and growth. Our evolutive virtual and physical
+                                offices offer a highly functional infrastructure, exceptional design that enhances
+                                your creativity and fosters productivity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="feedback-area ptb-100">
+        <div class="container">
+            <div class="feedback-slides owl-carousel owl-theme">
+                {% for item in testimonial %}
+                    <div class="single-feedback-item">
+                        <p>{{ item.content|safe }}</p>
+                        <div class="client">
+                            {{ item.name }}<br />
+                            {{ item.company }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <section class="place-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="place-content">
+                        <span class="sub-title">Enterprise Hubs</span>
+                        <h2>Building & Area</h2>
+                        <p>Our private offices, dedicated desks, virtual offices and co-working spaces provide flexible
+                            solutions for passionate people.</p>
+                        <ul class="features-list">
+                            <li>
+                                <div class="icon"><i class="flaticon-parking"></i></div>
+                                <span>Parking Area</span> Ample parking space
+                            </li>
+                            <li>
+                                <div class="icon"><i class="flaticon-breakfast"></i></div>
+                                <span>Restaurants</span> Dine in with us
+                            </li>
+                            <li>
+                                <div class="icon"><i class="flaticon-work"></i></div>
+                                <span>Offices</span> State of the art offices
+                            </li>
+                            <li>
+                                <div class="icon"><i class="flaticon-work"></i></div>
+                                <span>Offices</span> State of the art offices
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="place-image-slides owl-carousel owl-theme">
+                        <div class="single-place-image bg1"><img src="{% static 'new_front/assets/images/place-img1.jpg' %}" alt="image" /></div>
+                        <div class="single-place-image bg2"><img src="{% static 'new_front/assets/images/place-img2.jpg' %}" alt="image" /></div>
+                        <div class="single-place-image bg3"><img src="{% static 'new_front/assets/images/services/office_spaces.jpg' %}" alt="image" /></div>
+                        <div class="single-place-image bg4"><img src="{% static 'new_front/assets/images/services/places_image.jpg' %}" alt="image" /></div>
+                        <div class="single-place-image bg5"><img src="{% static 'new_front/assets/images/services/training.jpg' %}" alt="image" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="partner-area ptb-100 bg-f8f8f8">
+        <div class="container">
+            <div class="partner-title"><h2>Some of our clients</h2></div>
+            <div class="partner-slides owl-carousel owl-theme">
+                {% for item in client_logo %}
+                    <div class="single-partner-item">
+                        <a href="#"> <img src="https://enterprisehubs.com{{ item.logo.url }}" alt="image" /> </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <section class="blog-area ptb-100">
+        <div class="container">
+            <div class="section-title">
+                <span class="sub-title">Our Blog</span>
+                <h2>News and Insights</h2>
+                <p>We regularly publish business tips and corporate articles for your consumption</p>
+            </div>
+            <div class="row">
+                {% for item in blog_post %}
+                    <div class="col-lg-4 col-md-6">
+                    <div class="single-blog-post">
+                        <div class="post-image">
+                            <a href="#"><img src="https://enterprisehubs.com{{ item.image.url }}" alt="image" /></a>
+                            <div class="date"><i class="flaticon-calendar"></i> {{ item.date|date }}</div>
+                        </div>
+                        <div class="post-content">
+                            <h3><a href="#">{{ item.title }}</a></h3>
+                            <p>{{ item.content|safe|truncatewords:20 }}</p>
+                            <a href="#" class="default-btn">Read More <span></span></a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-12 col-md-12">
+                <div class="blog-notes">
+                    <p>Insights to help you do what you do better, faster and more profitably. <a href="#">Read Full Blog</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock main %}
+
+{% block extra_js%}
+    <script>
+        $(document).ready(function(){
+            $("#myModal").modal('show');
+    });
+</script>
+
+{% endblock %}

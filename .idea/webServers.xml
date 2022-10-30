@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="a85be038-ebeb-4aed-a451-fabef2213f7e" name="EnterpriseHubs" url="http://s16.wservices.ch">
+        <fileTransfer rootFolder="/home/daniel/enterprisehubs" accessType="SFTP" host="s16.wservices.ch" port="22" sshConfigId="3796604b-12b8-4e7b-b322-221e593a79c3" sshConfig="DjangoEurope">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

@@ -1,0 +1,129 @@
+{% load static %}
+{% load humanize %}
+
+        <!--Data Table-->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/simple-line-icons/css/simple-line-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/weather-icons/css/weather-icons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/themify-icons/css/themify-icons.css' %}">
+        <!-- endinject -->
+        <!-- Main Style  -->
+        <link rel="stylesheet" href="{% static 'backend/dist/css/main.css' %}">
+        <!--horizontal-timeline-->
+        <link rel="stylesheet" href="{% static 'backend/assets/js/horizontal-timeline/css/style.css' %}">
+        <script src="{% static 'backend/assets/js/modernizr-custom.js' %}"></script>
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+
+            <!--main content start-->
+        <body class="body" onload="window.print()">
+            <div id="content" class="ui-content">
+                <div class="ui-content-body">
+
+                    <div class="ui-container">
+
+
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <h5 style="color: darkred">{{ get_book_details.facility }}</h5>
+                                                <h5>Services Ordered By:</h5>
+                                                <address>
+                                                    {% if get_book_details.member %}
+                                                    <strong>{{ get_book_details.member }}</strong><br>
+                                                    {{ get_book_details.member.phone }}
+                                                    {% else %}
+                                                        Guest
+                                                    {% endif %}
+                                                </address>
+                                            </div>
+
+                                            <div class="col-xs-6 text-right">
+                                                <h5>Date: </h5>
+                                                <h5 class="text-navy">{{ get_book_details.date }}</h5>
+                                                {% if get_book_details.payment_status is False %}
+                                                    <label class="label label-danger">UNPAID</label>
+                                                    {% else %}
+                                                    <label class="label label-success">PAID</label> on {{ get_book_details.payment_date }} <br /><br />
+                                                {% endif %}
+                                                {% if get_book_details.is_completed %}
+                                                    <label class="label label-primary">COMPLETED</label> on {{ get_book_details.complete_date }}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover invoice-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Item</th>
+                                                        <th>Remark</th>
+                                                        <th>Unit Cost</th>
+                                                        <th>Quantity</th>
+                                                        <th>Total Cost</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for item in booked_services %}
+                                                    <tr>
+                                                        <td>{{ item.service }}</td>
+                                                        <td>{{ item.service_booking.Desc }}</td>
+                                                        <td>₦ {{ item.service.amount|intcomma }}</td>
+                                                        <td>{{ item.quantity }}</td>
+                                                        <td>₦ {{ item.amount_payable|intcomma }}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <table class="table table-hover invoice-total">
+                                                <tbody>
+                                                <tr>
+                                                    <td><strong>Sub Total :</strong></td>
+                                                    <td>₦ {{ total_amount|intcomma }}</td>
+                                                </tr>
+{#                                                <tr>#}
+{#                                                    <td><strong>TAX/VAT :</strong></td>#}
+{#                                                    <td>₦ 0.00</td>#}
+{#                                                </tr>#}
+                                                <tr>
+                                                    <td><strong>TOTAL :</strong></td>
+                                                    <td>₦ {{ total_amount|intcomma }}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <br/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </body>
+            <!--main content end-->
+
+
+    <!--Data Table-->
+{#        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>#}
+{#        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>#}
+{#        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>#}
+{#        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>#}
+{#        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>#}
+
+        <!--init data tables-->
+{#        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>#}
+

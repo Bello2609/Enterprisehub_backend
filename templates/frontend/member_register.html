@@ -1,0 +1,90 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Membership Registration Page | Enterprise Hubs</title>
+{% endblock page_title %}
+
+
+{% block page_content %}
+
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area about-us">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>contact</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="index.html">Home</a>></li>
+                                            <li>contact</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+                <!-- contact start-->
+                <div class="contact-area">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4 col-xs-12">
+                                <div class="contact-address text-center">
+                                    <div class="single-address">
+                                        <div class="single-address-icon">
+                                            <i class="fa fa-map-marker"></i>
+                                        </div>
+                                        <div class="single-address-info">
+                                            <h4>Address</h4>
+                                            <p>8901 Marmora Raod,<br>Glasgow, D04  89GR</p>
+                                        </div> 
+                                    </div> 
+                                    <div class="single-address">         
+                                        <div class="single-address-icon">
+                                            <i class="fa fa-phone"></i>
+                                        </div> 
+                                        <div class="single-address-info"> 
+                                            <h4>phone number</h4>  
+                                            <p>Telephone : (801) 2223 3337<br>Telephone : (801) 4256  9658</p>
+                                        </div>
+                                    </div> 
+                                    <div class="single-address">      
+                                        <div class="single-address-icon"> 
+                                            <i class="fa fa-globe"></i>
+                                        </div> 
+                                        <div class="single-address-info">  
+                                            <h4>email &amp; Web</h4>       
+                                            <p>Email: Infor@bootexperts.com<br>Web : www.reflex.com</p>
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-sm-8 col-xs-12">
+                                <div class="leave-comment comments">
+                                    <div class="comments-title">
+                                        <h4>leave a message</h4>
+                                    </div>
+                                    <div class="comment-form">
+                                        <form id="contact-form" action="https://d29u17ylf1ylz9.cloudfront.net/reflex-preview/reflex/mail.php" method="post">
+                                            <input type="text" placeholder="Your name" name="name">
+                                            <input type="text" placeholder="Email here" name="email">
+                                            <input class="f-wid" type="text" placeholder="Subject" name="subject">
+                                            <textarea cols="30" rows="9" placeholder="Write here" name="message"></textarea>
+                                            <button type="submit">submit</button>
+                                        </form>
+                                        <p class="form-message"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+{% endblock page_content %}

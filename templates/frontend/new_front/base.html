@@ -1,0 +1,171 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/animate.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/fontawesome.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/flaticon.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/owl.carousel.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/imagelightbox.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/meanmenu.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'new_front/assets/css/responsive.css' %}" />
+        <style>
+            .justify {
+                text-align: justify;
+            }
+        </style>
+        {% block extra_css %}
+
+        {% endblock extra_css %}
+        <title>Enterprise Hubs - Where Entrepreneurs go to grow...</title>
+    </head>
+    <body>
+        {% block nav %}
+        <div class="navbar-area">
+            <div class="zash-responsive-nav">
+                <div class="container">
+                    <div class="zash-responsive-menu">
+                        <div class="logo">
+                            <a href="{% url 'home_page' %}">
+                               {% block mini_logo %} <img src="{% static 'img/logo/logo.jpg' %}" alt="logo"/> {% endblock %}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="zash-nav">
+                <div class="container">
+                    <nav class="navbar navbar-expand-md navbar-light">
+                        <a class="navbar-brand" href="{% url 'home_page' %}">
+                            {% block logo %}<img src="{% static 'img/logo/logo.jpg' %}" width="250" alt="logo" /> {% endblock %}
+                        </a>
+                        <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item"><a href="{% url 'home_page' %}" class="nav-link">Home</a></li>
+                                <li class="nav-item"><a href="{% url 'about_page' %}" class="nav-link">About</a></li>
+                                <li class="nav-item"><a href="{% url 'service_page' %}" class="nav-link">Services</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link">Location <i class="flaticon-down-arrow"></i></a>
+                                    <ul class="dropdown-menu">
+                                    <li class="nav-item"><a href="{% url 'lagos' %}" class="nav-link">Lagos</a></li>
+                                    <li class="nav-item"><a href="{% url 'abuja' %}" class="nav-link">Abuja</a></li>
+                                    <li class="nav-item"><a href="{% url 'kano' %}" class="nav-link">Kano</a></li>
+                                </ul>
+                                <li class="nav-item"><a href="{% url 'gallery_page' %}" class="nav-link">Gallery</a></li>
+                                <li class="nav-item"><a href="{% url 'all_blog_post' %}" class="nav-link">Blog</a></li>
+                                <li class="nav-item"><a href="{% url 'franchise' %}" class="nav-link">Franchise</a></li>
+                                <li class="nav-item"><a href="{% url 'contact_page' %}" class="nav-link">Contact</a></li>
+                            </ul>
+                            <div class="others-option">
+                                <div class="call-us">
+                                    <div class="icon">
+                                        <a href="tel:+2349060009685">
+                                            <i class="flaticon-call"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        {% endblock nav %}
+
+
+        {% block main %}
+
+        {% endblock main %}
+
+        {% block footer %}
+        <footer class="footer-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>Enterprise Hubs</h3>
+                            <div class="logo">
+                                <p class="justify">
+                                    Enterprise Hubs owned by Pedestal Africa Limited is an integrated network of online
+                                    and physical resource centres for emerging enterprises in Nigeria and beyond
+                                </p>
+                            </div>
+                            <ul class="social">
+                                <li>
+                                    <a href="https://www.facebook.com/enterprisehubs01/" target="_blank"><i class="flaticon-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://linkedin.com/in/enterprise-hubs-32b91317a" target="_blank"><i class="flaticon-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a href="https://www.instagram.com/enterprisehubs/" target="_blank"><i class="flaticon-instagram"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-footer-widget">
+                            <h3>Help & Support</h3>
+                            <ul class="footer-quick-links">
+                                <li><a href="#">Terms & Condition</a></li>
+                                <li><a href="{% url 'business)_directory' %}">Business Directory</a></li>
+                                <li><a href="#">Download Ventures Day April 2020 Presentation</a></li>
+                                <li><a href="{% url 'login' %}">Member Login</a></li>
+                                <li><a href="{% url 'register_member' %}">Member Registration</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-0 offset-sm-3 offset-md-3">
+                        <div class="single-footer-widget">
+                            <h3>Contact Info</h3>
+                            <ul class="footer-contact-info">
+                                <li><span>Lagos Address:</span> Trinity Avenue by Landmark, Off Ligali Ayorinde, Victoria Island, Lagos.</li>
+                                <li><span>Kano Address:</span> 14, Ibrahim Dabo Road, Tarauni G.R.A, Kano State.</li>
+                                <li><span>Abuja Address:</span> Ground Floor, Wells Carlton Hotel. 8 Gado Nasko Street, Asokoro, Abuja</li>
+                                <li>
+                                    <span>Email:</span> <a href="mailto:info@enterprisehubs.com"><span class="__cf_email__" data-cfemail="87fde6f4efc7e0eae6eeeba9e4e8ea">info@enterprisehubs.com</span></a>
+                                </li>
+                                <li><span>Phone:</span> <a href="tel:+2349060009684">+2349060009685</a></li>
+                                <li><span>Phone</span> <a href="tel:+2348122244752">+2348122244752</a></li>
+                                <li><span>Phone</span> <a href="tel:+2348095862293">+2348095862293</a></li>
+                                <li><a href="https://www.google.com/maps/place/Enterprise+Hubs/@6.4245221,3.4515398,17z/data=!3m1!4b1!4m5!3m4!1s0x103bf57f54efee35:0xd6527b4289e60088!8m2!3d6.4245221!4d3.4537285" target="_blank">View Location on GoogleMap</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright-area">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <script>
+                                let date = new Date();
+                                document.write('<p>Copyright ® ' + date.getFullYear() +  ' <a href="https://enterprisehubs.com/">Enterprise Hubs </a>. All right reserved.</p>')
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% endblock footer %}
+        <div class="go-top"><i class="fas fa-chevron-up"></i><i class="fas fa-chevron-up"></i></div>
+        <script src="{% static 'new_front/assets/js/jquery.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/popper.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/mixitup.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/parallax.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/jquery.meanmenu.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/imagelightbox.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/wow.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/form-validator.min.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/contact-form-script.js' %}"></script>
+        <script src="{% static 'new_front/assets/js/main.js' %}"></script>
+        {% block extra_js %}
+
+        {% endblock extra_js %}
+    </body>
+</html>

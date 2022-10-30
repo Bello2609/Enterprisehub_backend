@@ -1,0 +1,192 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}Enterprise Hub - Admin Portal {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+        <!--product gallery-->
+        <link rel="stylesheet" href="{% static 'backend/assets/js/product-gallery/css/style.css' %}">
+        <script src="{% static 'backend/assets/js/product-gallery/js/modernizr.js' %}"></script>
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        Video Resource List
+                        {% if user_type is 2 %}
+                            {% if resource_type == 'video' %}
+                                <a href="{% url 'new_resource_file' 'video' %}" class="btn" style="background-color: darkred; color: white"> New Video Resource File</a>
+                            {% elif resource_type == 'doc' %}
+                                <a href="{% url 'new_resource_file' 'doc' %}" class="btn" style="background-color: darkred; color: white"> New File Resource File</a>
+                            {% else %}
+                                <a href="{% url 'new_resource_file' 'link' %}" class="btn" style="background-color: darkred; color: white"> New Resource Link</a>
+                            {% endif %}
+                        {% endif %}
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">Resource List</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+
+                        {% if resource_type == 'video' %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel">
+                                        <header class="panel-heading">
+                                            Resource Center Video Files
+                                            <span class="tools pull-right">
+                                                <a class="refresh-box fa fa-repeat" href="javascript:;"></a>
+                                                <a class="collapse-box fa fa-chevron-down" href="javascript:;"></a>
+                                                <a class="close-box fa fa-times" href="javascript:;"></a>
+                                            </span>
+                                        </header>
+                                        <div class="panel-body">
+                                            <ul class="cd-items cd-container">
+
+                                                {% for item in video_list %}
+                                                <li class="cd-item" style="width: 29%">
+                                                    <p>{{ item.title }}</p>
+                                                    <iframe width="220" height="220" src="https://www.youtube.com/embed/{{ item.video_id }}?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                                    {% if user_type is 2 %}
+                                                        <a href="{% url 'delete_resource' item.id resource_type %}"><span style="color: darkred" class="fa fa-trash confirm-delete"></span></a>
+                                                    {% endif %}
+                                                </li>
+                                                {% endfor %}
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% elif resource_type == 'doc' %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <section class="panel">
+
+                                        <div class="panel-body table-responsive">
+                                            <table class="table convert-data-table table-striped">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>
+                                                            Date Added
+                                                        </th>
+                                                        <th>
+                                                            Title
+                                                        </th>
+                                                        <th>
+                                                            Download File
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for item in file_list %}
+                                                    <tr>
+                                                        <td>
+                                                             {{ item.date }}
+                                                        </td>
+                                                        <td>
+                                                            {{ item.title }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ item.doc.url }}">Click to Download <span class="fa fa-download" style="color: darkred"></span></a>
+                                                            {% if user_type is 2 %}
+                                                                <a href="{% url 'delete_resource' item.id resource_type %}"><span style="color: darkred; float: right" class="fa fa-trash confirm-delete"></span></a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+
+                        {% else %}
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <section class="panel">
+
+                                        <div class="panel-body table-responsive">
+                                            <table class="table convert-data-table table-striped">
+                                                <thead>
+                                                    <tr class="text-center">
+                                                        <th>
+                                                            Date Added
+                                                        </th>
+                                                        <th>
+                                                            Title
+                                                        </th>
+                                                        <th>
+                                                            Link
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for item in link_list %}
+                                                    <tr>
+                                                        <td>
+                                                             {{ item.date }}
+                                                        </td>
+                                                        <td>
+                                                            {{ item.title }}
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ item.link }}" target="_blank">Click Link </a>
+                                                            {% if user_type is 2 %}
+                                                                <a href="{% url 'delete_resource' item.id resource_type %}"><span style="color: darkred; float: right" class="fa fa-trash confirm-delete"></span></a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+{#        <script src="{% static 'bower_components/datatables-tabletools/js/dataTables.tableTools.js' %}"></script>#}
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+        <!--product gallery-->
+        <script src="{% static 'assets/js/product-gallery/js/velocity.min.js' %}"></script>
+        <script src="{% static 'assets/js/product-gallery/js/main.js' %}"></script>
+
+{% endblock JS %}

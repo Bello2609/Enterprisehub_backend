@@ -1,0 +1,27 @@
+Hi, {{ name }} <br /><br />
+Welcome to Enterprise Hubs <br /><br />
+<p>Your bookings #{{ booking_id }} has been received</p> <br />
+
+<p><strong>{{ booked_facility }}</strong></p>
+<p><strong>{{ booked_category }}</strong></p>
+<p><strong>{{ booked_unit }}</strong></p>
+<p><strong>From: {{ book_from }}</strong></p>
+{% if book_to %}
+<p><strong>From: {{ book_to }}</strong></p>
+{% endif %}
+<br />
+
+<p>To secure your bookings, follow the prompt to complete payment online or make payment of
+    NGN {{ amount_payable }} to any of our bank details below within 24 hours</p>
+
+<h2>Bank: Fidelity Bank Plc </h2>
+<h2>Account No: 4110072916</h2>
+<h2>Account Name: Pedestal Africa Limited/Enterprise Hubs</h2>
+
+<small>All un-secured bookings will automatically cancel within 24 hours.</small> <br /><br />
+
+Thanks <br />
+Enterprise Hubs
+
+
+

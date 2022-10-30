@@ -1,0 +1,115 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Service-Page | Enterprise Hubs</title>
+{% endblock page_title %}
+
+
+{% block page_content %}
+
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area about-us" style="background: url({% static 'img/service/1.jpg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>services</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li>services</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+
+                 <!-- features area start -->
+                <div class="features-area ptb-95 bg-white">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title">
+                                    <h2>How we take care of you / <span>Our Services</span></h2>
+                                    <p>We offer much more than just an office space</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-3 col-sm-12 col-xs-12">
+                                <div class="feature-img hidden-sm hidden-xs" style="padding-top: 20px">
+                                    <img src="{% static 'img/slider/1.jpeg' %}" alt="">
+                                    <img src="{% static 'img/slider/2.jpeg' %}" alt="">
+                                    <img src="{% static 'img/slider/3.jpeg' %}" alt="">
+                                    <img src="{% static 'img/slider/5.jpeg' %}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12">
+                                <div class="feature-info">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="single-feature">
+                                                <h4>Cool Co-working Spaces</h4>
+                                                <p>Whether it’s our shared offices or private offices, they are designed
+                                                    to encourage inspiration, creativity and productivity – and reflect your
+                                                    company’s culture of excellence and innovation. Our spaces are built with
+                                                    comfort and productivity in mind and our flexible system provides
+                                                    extensive work hours (6:00am -9:00 pm), all-inclusive amenities
+                                                    (fast Wi-Fi, coffee, 7 days a week access) are designed to enable you
+                                                    focus on what matters.</p>
+                                            </div>
+                                            <div class="single-feature">
+                                                <h4>Enterprise Development Resources</h4>
+                                                <p>We are committed to providing you all the support you need to grow your
+                                                    business. Our monthly enterprise event added to the enterprise club is
+                                                    created to facilitate constant learning and new connections. </p>
+                                            </div>
+                                            <div class="single-feature hidden-sm">
+                                                <h4>Online B2B Exchange</h4>
+                                                <p>We believe in your business which is why we provide an online platform
+                                                    for you to communicate your offerings, interact with your clients and
+                                                    conclude transactions to ultimately grow your business.
+                                                    We offer you the visibility you need to succeed.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="single-feature">
+                                                <h4>World Class Virtual office</h4>
+                                                <p>Never be out of reach. Build your empire from anywhere in the world with
+                                                    our world class virtual office solutions. Access important data and
+                                                    documents anytime, anywhere with our virtual storage platform. </p>
+                                            </div>
+                                            <div class="single-feature">
+                                                <h4>Multi-Site Entrepreneur Mobility</h4>
+                                                <p>With our multi-site solutions, a single subscription affords you
+                                                    seamless access to all our hubs across various locations.
+                                                    We save you time and stress, so work productivity is assured regardless
+                                                    of your location.</p>
+                                            </div>
+                                            <div class="single-feature hidden-sm">
+                                                <h4>Hassle Free Outsourcing</h4>
+                                                <p>We take care of all your outsourcing needs so you can focus your
+                                                    energies on more strategic and value adding enterprise activities.
+                                                    We also provide concierge services that ensures your time is fully
+                                                    maximised for business growth.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="declarations"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- features-area end -->
+
+            </div>
+
+{% endblock page_content %}

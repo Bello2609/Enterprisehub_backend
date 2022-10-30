@@ -1,0 +1,105 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+       {% block page_content %}
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area about-us" style="background-image: url({% static 'img/slider/6.jpeg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>Gallery</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li>Gallery</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+                <!-- portfolio start -->
+                <div class="portfolio-area latest-area marg-100">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="portfolio_gallery_area">
+                                <div class="gallery">
+                                    <div class="gallery_menu portfolio-menu text-center">
+                                        <ul id="filter" class="filter-menu">
+                                            <li class="current_menu_item" data-filter="*">All </li>
+                                            {% for cat in galley_cat %}
+                                                <li data-filter=".{{ cat.id }}">{{ cat }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div><!-- gallery_menu End -->
+                                    <div class="gallery_items clearfix">
+                                        {% for item in gallery_image %}
+
+                                            <!-- class lg -->
+                                        <div class="grid-item grid-item-1 single-portfolio hidden-xs hidden-sm hidden-md {{ item.category.id }}">
+                                            <div class="portfolio_effect single-portfolio-item" style="height: 427px">
+                                                <img class="img img-responsive" src="{{ item.image.url }}" alt="gallery image 1">
+                                                <div class="portfolio-detail">
+                                                    <a class="venobox vbox-item" href="{{ item.image.url }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div><!-- grid-item End -->
+
+                                            <!-- class md -->
+                                        <div class="grid-item grid-item-1 single-portfolio hidden-lg hidden-sm hidden-xs {{ item.category.id }}">
+                                            <div class="portfolio_effect single-portfolio-item" style="height: 341px">
+                                                <img class="img img-responsive" src="{{ item.image.url }}" alt="gallery image 1">
+                                                <div class="portfolio-detail">
+                                                    <a class="venobox vbox-item" href="{{ item.image.url }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div><!-- grid-item End -->
+
+                                        <!-- class sm -->
+                                        <div class="grid-item grid-item-1 single-portfolio hidden-lg hidden-md hidden-xs  {{ item.category.id }}">
+                                            <div class="portfolio_effect single-portfolio-item" style="height: 256px">
+                                                <img class="img img-responsive" src="{{ item.image.url }}" alt="gallery image 1">
+                                                <div class="portfolio-detail">
+                                                    <a class="venobox vbox-item" href="{{ item.image.url }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div><!-- grid-item End -->
+
+                                        <!-- class xs -->
+                                        <div class="grid-item grid-item-1 single-portfolio hidden-lg hidden-md hidden-sm  {{ item.category.id }}">
+                                            <div class="portfolio_effect single-portfolio-item" style="height: 138px">
+                                                <img class="img img-responsive" src="{{ item.image.url }}" alt="gallery image 1">
+                                                <div class="portfolio-detail">
+                                                    <a class="venobox vbox-item" href="{{ item.image.url }}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div><!-- grid-item End -->
+                                            <div class="clearfix"></div>
+                                        {% endfor %}
+                                    </div>
+                                </div><!-- gallery End -->
+                            </div><!-- portfolio_gallery_area End -->
+                       </div>
+                    </div>
+                </div>
+                <!-- portfolio end -->
+
+            </div>
+        </div>
+        {% endblock page_content %}
+        
+

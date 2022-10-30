@@ -1,0 +1,147 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}LegalStallion - Dashboard {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        {{ object.first_name }} {{ object.last_name }} Detail Page
+                    </h4>
+                    <div class="breadcrumb-right hidden-xs hidden-sm">
+                        <ol class="breadcrumb">
+{#                            <li><a href="{% url 'login_dashboard' %}">Home</a></li>#}
+{#                            <li><a href="{% url 'staff_list' %}">Staff list</a></li>#}
+                            <li class="active">{{ object.first_name }} {{ object.last_name }}</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel profile-wrap">
+{#                                    <header class="panel-heading clearfix">#}
+{#                                        <h3 class="profile-title pull-left">{{ object.first_name }} {{ object.last_name }} Profile</h3>#}
+{#                                    </header>#}
+                                    <div class="panel-body row">
+                                        <div class="col-md-4">
+                                            <div class="profile-thumb">
+                                                {% if object.image  %}
+                                                    <img src="{{ object.image.url }}" alt=""/>
+                                                {% else %}
+                                                    <img src="{% static 'img/team/avatar.jpg' %}" alt=""/>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="profile-info">
+                                                <h5>Contact Information</h5>
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <i class="fa fa-user"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">Username</span>
+                                                            {{ object.username }}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-phone"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">Mobile Number</span>
+                                                            {{ object.phone }}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-envelope-o"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">E-mail</span>
+                                                            {{ object.email }}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-map-marker"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">Address</span>
+                                                           {{ object.address }}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="profile-tabs">
+                                                <ul class="nav nav-tabs">
+                                                    <li class=""><a href="#tab1"data-toggle="tab">Recent Activities</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="tab1" class="tab-pane fade in active">
+                                                        <div class="panel-body table-responsive">
+                                                        {% if activity_log %}
+                                                            <table class="table convert-data-table table-striped">
+                                                                <thead>
+                                                                    <tr class="text-center">
+                                                                        <th>
+                                                                            Recent Activities
+                                                                        </th>
+                                                                        <th>
+                                                                            Action Date
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for item in activity_log %}
+                                                                    <tr>
+                                                                        <td>
+                                                                             {{ item.log_text }}
+                                                                        </td>
+                                                                        <td>
+                                                                             {{ item.action_time|timesince }}
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        {% else %}
+                                                            <h3>No activity perform by staff yet</h3>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+{#        <script src="{% static 'bower_components/datatables-tabletools/js/dataTables.tableTools.js' %}"></script>#}
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+{% endblock JS %}

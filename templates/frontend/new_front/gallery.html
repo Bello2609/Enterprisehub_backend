@@ -1,0 +1,46 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+
+    <div class="page-title-area" style="background-image: url({% static 'new_front/assets/images/camera-wooden-table-with-reflection-prism-lights.jpg' %})">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="page-title-content">
+                        <h2>Gallery</h2>
+                        <ul>
+                            <li><a href="{% url 'home_page' %}">Home</a></li>
+                            <li>Gallery</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="gallery-area ptb-100">
+        <div class="container">
+            <div class="shorting-menu">
+                <button class="filter" data-filter="all">All</button>
+                {% for item in galley_cat %}
+                    <button class="filter" data-filter=".{{ item.id }}">{{ item.name|capfirst }}</button>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="shorting">
+                <div class="row">
+                    {% for item in gallery_image %}
+                        <div class="single-gallery-box mix {{ item.category.id }}">
+                            <img src="https://enterprisehubs.com{{ item.image.url }}" alt="image" />
+                            <a href="https://enterprisehubs.com{{ item.image.url }}" class="gallery-btn" data-imagelightbox="popup-btn"><i class="flaticon-expand"></i></a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock main %}

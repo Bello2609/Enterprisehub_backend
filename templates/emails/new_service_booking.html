@@ -1,0 +1,17 @@
+{% load humanize %}
+<p>Hi {{ user }}</p><br />
+
+{% if type == 'new' %}
+<p>A new service with ID #{{ service_id }} has been booked.</p><br />
+    {% if service_paid is True %}
+        <p>Your wallet has been debited the <strong>amount of NGN{{ amount|intcomma }} only.</strong></p>
+    {% else %}
+        <p>Amount payable is {{ amount|intcomma }}. You have insufficient balance. Please kindly fund your account </p>
+    {% endif %}
+
+{% else %}
+    <p>You service with ID #{{ service_id }} has been completed. </p>
+{% endif %}
+
+<p>Thanks</p>
+<p>Enterprise Hubs Team</p>

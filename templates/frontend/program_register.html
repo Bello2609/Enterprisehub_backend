@@ -1,0 +1,57 @@
+{% extends 'frontend/ui_base.html' %}
+
+{% load static %}
+
+{% block page_content %}
+    <div class="main-content-wrapper">
+        <!-- banner start -->
+{#        <div class="banner-area about-us">#}
+{#            <div class="container">#}
+{#                <div class="row">#}
+{#                    <div class="col-xs-12">#}
+{#                        <div class="banner-text text-center">#}
+{#                            <div class="banner-title">#}
+{#                                <h2>Secure your space for <br /> {{ object.name }}</h2>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+        <!-- banner end -->
+        <!-- contact start-->
+
+        <div class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3">
+                        <div class="leave-comment comments">
+                            {% if messages %}
+                                <br />
+                                {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }} alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <span style="margin-left: 10px">{{ message }}</span>
+                                        </div>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="comments-title">
+                                <p style="text-align: center; font-size: 40px">Register for {{ object.name }}</p> <br />
+                                <p style="font-family: 'Microsoft Sans Serif', Tahoma, Arial, Verdana, Sans-Serif; line-height: 25px;">{{ object.about }} </p> <br />
+                            </div>
+                            <div class="">
+                                <form id="register_form" action="#" method="post">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button class="btn btn-success" type="submit">submit</button>
+                                </form>
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact end -->
+    </div>
+{% endblock %}

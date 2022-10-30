@@ -1,0 +1,204 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}LegalStallion - Dashboard {% endblock title %}
+{% block CSS %}
+    <!-- jQuery Steps Dependencies -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/jquery.steps/demo/css/jquery.steps.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/select2/dist/css/select2.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+        <style>
+        .datepicker table tr td.disabled,
+        .datepicker table tr td.disabled:hover {
+          background: #d8eefc;
+          color: #999999;
+          cursor: default;
+            }
+        </style>
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        Member Booking
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+{#                            <li><a href="{% url 'login_dashboard' %}">Home</a></li>#}
+{#                            <li><a href="{% url 'client_list' %}">Client List</a></li>#}
+{#                            <li class="active">New Client</li>#}
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <form class="form-horizontal " id="commentForm" method="post"  >
+                                            {% csrf_token %}
+                                            {% if form.errors %}
+                                                <div class="alert alert-danger alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <span style="margin-left: 10px">{{ form.errors }}</span>
+                                                </div>
+                                            {% endif %}
+                                            <div class="form-group ">
+                                                <label for="select_type" class="control-label col-lg-3">Facility <span style="color: darkred">*</span></label>
+                                                <div class="col-lg-6">
+                                                    {{ form.facility }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="select_type" class="control-label col-lg-3">Category <span style="color: darkred">*</span></label>
+                                                <div class="col-lg-6">
+                                                    {{ form.category }}
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="select_type" class="control-label col-lg-3">Unit <span style="color: darkred">*</span></label>
+                                                <div class="col-lg-6">
+                                                    {{ form.unit }}
+                                                </div>
+                                            </div>
+                                            {% if user_type is 2 %}
+                                            <div class="form-group ">
+                                                <label for="email" class="control-label col-lg-3">Member <span style="color: darkred">*</span></label>
+                                                <div class="col-lg-6">
+                                                    {{ form.member }}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                              <div class="form-group ">
+                                                <label for="email" class="control-label col-lg-3">Book-From<span style="color: darkred">*</span></label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group date data-date=" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                        <input type="hidden" class="target_datepicker" />
+                                                        {{ form.book_from }}
+                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th fa fa-calendar"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group ">
+                                                <label for="email" class="control-label col-lg-3">Book-To </label>
+                                                <div class="col-lg-6">
+                                                    <div class="input-group date data-date=" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                        {{ form.book_to }}
+                                                         <span class="input-group-addon"><i class="glyphicon glyphicon-th fa fa-calendar"></i></span>
+                                                    </div>
+                                                    <small style="color: darkgreen">Select date if booking for a stretch period </small>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-3 col-lg-6">
+                                                    <button class="btn btn-primary" type="submit">Save</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+     <!-- jQuery Steps Dependencies -->
+    <script src="{% static 'backend/bower_components/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-validation.js' %}"></script>
+    <script src="{% static 'backend/bower_components/select2/dist/js/select2.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-select2.js' %}"></script>
+    <script src="{% static 'backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+{#    <script src="{% static 'backend/assets/js/init-datepicker.js' %}"></script>#}
+
+    <script>
+
+        $("#id_unit").change(function () {
+
+            let unit_id = $(this).val();
+
+            $.ajax({
+                url: {% url 'unit_booked_date' %},
+                data: {
+                    'unit': unit_id,
+                },
+
+                success: function (data) {
+                    let ArrVar = data.split("\n");
+
+                    $('.input-group.date').datepicker({
+                        autoclose: true,
+                        todayHighlight: true,
+                        allowClear: true,
+                        datesDisabled: ArrVar,
+                        daysOfWeekDisabled: [0]
+
+                    });
+                }
+            })
+        });
+
+    </script>
+
+    <script>
+
+    $("#id_facility").change(function () {
+
+      let facility_id = $(this).val();
+
+      $.ajax({
+
+        url: {% url 'ajax_load_cat' %},
+        data: {
+          'facility': facility_id
+        },
+
+        success: function (data) {
+          $("#id_category").html(data);
+        }
+      });
+    });
+
+    </script>
+
+    <script>
+
+    $("#id_category").change(function () {
+        let category_id = $(this).val();
+
+        $.ajax({
+
+        url: {% url 'ajax_load_unit' %},
+        data: {
+          'category': category_id
+        },
+
+        success: function (data) {
+
+          $("#id_unit").html(data);
+        }
+      });
+    });
+    </script>
+
+{% endblock JS %}
+
+
+

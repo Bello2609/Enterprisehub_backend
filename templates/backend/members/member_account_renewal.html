@@ -1,0 +1,245 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+        <title>{{ member.username|capfirst }} account renewal</title>
+
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/simple-line-icons/css/simple-line-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/weather-icons/css/weather-icons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/themify-icons/css/themify-icons.css' %}">
+
+        <!-- Main Style  -->
+        <link rel="stylesheet" href="{% static 'backend/dist/css/main.css' %}">
+
+        <script src="{% static 'backend/assets/js/modernizr-custom.js' %}"></script>
+    </head>
+    <body style="background: white">
+
+        <div class="expired">
+            <a href="{% url 'member_details' member_id %}">
+                 <img style="margin-top: 15px; max-width: 200px; margin-left: -3px;" src="{% static 'img/logo/logo.png' %}" alt="legal stallion logo"/>
+            </a>
+        </div>
+        <br />
+        <div class="container" style="background: #262626">
+            <!--page title and breadcrumb start -->
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="page-title" style="color: white; margin: 10px"> Account settings
+                    </h1>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <section class="panel">
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }} alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <span style="margin-left: 10px">{{ message }}</span>
+
+                                                </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    <header class="panel-heading">
+                                        Account Details
+                                        <div class="pull-right">
+                                            <a href="{% url 'member_account' member_id %}">
+                                                <button class="btn btn-primary btn-sm"> Reload Page</button>
+                                            </a>
+                                        </div>
+                                    </header>
+                                    <div class="panel-body">
+
+                                        <table class="table  table-hover general-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Account Created on</strong></td>
+                                                    <td>{{ member.date_joined|date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Active Package Type</strong></td>
+                                                    <td>{{ member.type }}<br />
+                                                        <a href="#myModal" data-toggle="modal" class="label label-danger">click to change package type</a>
+                                                    </td>
+                                                </tr>
+                                                {% if member.upgrade_type %}
+                                                    {% if member.type != member.upgrade_type  %}
+                                                    <tr>
+                                                        <td><strong>Changing Package To</strong></td>
+                                                        <td>{{ member.upgrade_type }}<br />
+                                                            <a class="label label-default">Package will be changed on your next payment</a>
+                                                        </td>
+                                                    </tr>
+                                                    {% endif %}
+                                                {% endif %}
+
+                                                <tr>
+                                                    <td><strong>Last Payment Date</strong></td>
+                                                    {% if member.last_pay_date %}
+                                                    <td>{{ member.last_pay_date|date }}</td>
+                                                    {% else %}
+                                                        <td>None</td>
+                                                    {% endif %}
+                                                </tr>
+
+                                                <tr>
+                                                    <td><strong>Payment Due Date</strong></td>
+                                                    {% if member.expire_date %}
+                                                    <td>{{ member.expire_date|date }}</td>
+                                                    {% else %}
+                                                        <td>None</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Amount</strong></td>
+                                                    {% if member.upgrade_type %}
+                                                        <td>₦ {{ member.upgrade_type.before_tax|intcomma }}</td>
+                                                    {% else %}
+                                                        <td>₦ {{ member.type.before_tax|intcomma }}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tax</strong></td>
+                                                    {% if member.upgrade_type %}
+                                                        <td>₦ {{ member.upgrade_type.tax|intcomma }}</td>
+                                                    {% else %}
+                                                        <td>₦ {{ member.type.tax|intcomma }}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Amont Payable</strong></td>
+                                                    {% if member.upgrade_type %}
+                                                        <td>₦ {{ member.upgrade_type.amount|intcomma }}</td>
+                                                    {% else %}
+                                                        <td>₦ {{ member.type.amount|intcomma }}</td>
+                                                    {% endif %}
+                                                </tr>
+                                                 <tr>
+                                                    <td><strong>Account Status</strong></td>
+                                                    <td>
+                                                        {% if member.is_active is False %}
+                                                            {% if member.last_pay_date %}
+                                                                <label class="label label-danger">Expired</label>
+                                                            {% else %}
+                                                                <label class="label label-primary">In-active</label>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <label class="label label-success">Active</label>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                        <br />
+                                        <div class="text-center">
+                                            {% if member.upgrade_type %}
+                                                {% if member.is_activated is False %}
+                                                    <a href="{% url 'payment_resources' member_id 'activate_fee' member.upgrade_type.amount|floatformat:0 %}"><button type="button" class="btn btn-primary"> Pay Online </button></a>
+                                                {% else %}
+                                                    <a href="{% url 'payment_resources' member_id 'account_renewal' member.upgrade_type.amount|floatformat:0 %}"><button type="button" class="btn btn-primary"> Pay Online </button></a>
+                                                {% endif %}
+                                            {% else %}
+                                                {% if member.is_activated is False %}
+                                                    <a href="{% url 'payment_resources' member_id 'activate_fee' member.type.amount|floatformat:0 %}"><button type="button" class="btn btn-primary"> Pay Online </button></a>
+                                                {% else %}
+                                                <a href="{% url 'payment_resources' member_id 'account_renewal' member.type.amount|floatformat:0 %}"><button type="button" class="btn btn-primary"> Pay Online </button></a>
+                                                {% endif %}
+                                            {% endif %}
+                                            <a href="{% url 'member_details' member_id %}"><button type="button" class="btn btn-default"> My Profile </button></a>
+                                        </div>
+                                    </div>
+                                </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Change Package Type</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="post" action="#">
+                            {% csrf_token %}
+                            <label>Select Package </label>
+                            {{ form.upgrade_type }}
+                            <br />
+                            <button class="btn btn-default">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- inject:js -->
+        <script src="{% static 'backend/bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/autosize/dist/autosize.min.js' %}"></script>
+        <!-- endinject -->
+
+        <!-- Common Script   -->
+        <script src="{% static 'backend/dist/js/main.js' %}"></script>
+
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+
+        {% if ref_id %}
+            <span onload="payWithPaystack()"></span>
+        <script>
+          setTimeout(
+              function payWithPaystack(){
+                var handler = PaystackPop.setup({
+                  key: 'pk_live_ae71589c8e56b06a2f9c236e6b41211a110738c3',
+                  // key: 'pk_test_f3bb813157b3ac821a2a7a43b5a86dcfb0cd1fcb',
+                  email: '{{ member.email }}',
+                  amount: {{ amount|floatformat:0 }}00,
+                  ref: '{{ ref_id }}',
+                  metadata: {
+                     custom_fields: [
+                        {
+                            display_name: "Mobile Number",
+                            variable_name: "mobile_number",
+                            value: "+2348012345678"
+                        }
+                     ]
+                  },
+                  callback: function(response){
+                      {% if ref_id %}
+                      window.location = '{% url 'verify_payment' member_id ref_id t_type %}';
+                      {% endif %}
+
+                  },
+                  onClose: function(){
+                    window.location = '{% url 'member_account' member_id %}';
+              }
+                });
+                handler.openIframe();
+              },
+          0)
+        </script>
+    {% endif %}
+
+    </body>
+</html>

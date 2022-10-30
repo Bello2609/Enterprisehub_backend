@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{% load i18n static slick_admin_tags %}
+
+{% block bodyclass %}{% slick_admin_cms_enabled_as as cms_enabled %}{% if cms_enabled %} slick-admin-cms{% endif %}{% endblock %}
+
+{% block slickhead %}
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'django_slick_admin/css/django-slick-admin.css' %}"/>
+{% endblock %}
+
+{% block branding %}
+{% slick_admin_cms_enabled_as as cms_enabled %}
+{% slick_admin_dashboard_enabled_as as dashboard_enabled %}
+{% if cms_enabled %}
+    {% include 'admin/components/header_cms.html' %}
+{% else %}
+    {% include 'admin/components/header_default.html' %}
+{% endif %}
+{% endblock %}
+
+{% block footer %}{% include 'admin/components/footer.html' %}{% endblock %}

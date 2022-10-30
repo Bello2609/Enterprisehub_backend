@@ -1,0 +1,343 @@
+{% load static %}
+
+<!Doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        {% block page_title %}
+        <title>Enterprise Hubs | Official Website</title>
+        {% endblock page_title %}
+        <meta name="description" content="Enterprise Hub is a Co-Working Space, but more.. ">
+        <meta name="author" content="Kilanko Daniel | Ideathinkers Web Solutions">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+		<link rel="stylesheet" type="text/css" href="{% static 'lib/custom-slider/css/nivo-slider.css' %}" media="screen" />
+		<link rel="stylesheet" type="text/css" href="{% static 'lib/custom-slider/css/preview.css' %}" media="screen" />
+        <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.css' %}">
+        <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+        <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.css' %}">
+        <link rel="stylesheet" href="{% static 'css/material-design-iconic-font.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+        <link rel="stylesheet" href="{% static 'css/meanmenu.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <link rel="stylesheet" href="{% static 'css/slick.css' %}">
+        <link rel="stylesheet" href="{% static 'css/venobox.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery.circliful.css' %}">
+        <link rel="stylesheet" href="{% static 'css/animate-heading.css' %}">
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" href="{% static 'css/jquery.mb.YTPlayer.css' %}">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+        <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
+
+
+    </head>
+
+    {% block add_css %}
+
+    {% endblock add_css %}
+    <body style="font-family: 'Poppins', sans-serif;">
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+        (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/5c98dd0f6bba460528ff7e78/default';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+        })();
+    </script>
+<!--End of Tawk.to Script-->
+
+    <style>
+        form.search-form input[type=text] {
+              padding: 10px;
+              font-size: 13px;
+              border: 1px solid grey;
+              float: left;
+              width: 80%;
+              background: #f1f1f1;
+        }
+        form.search-form button {
+          float: left;
+          width: 20%;
+          padding: 10px;
+          background: #272727;
+          color: #f1f1ff;
+          font-size: 17px;
+          border: 0px solid grey;
+          border-radius: 5px;
+          border-left: none; /* Prevent double borders */
+          cursor: pointer;
+        }
+        form.search-form button:hover {
+          background: #FF2600;
+        }
+    </style>
+<!--End of Tawk.to Script-->
+    <!-- Pre Loader
+    ============================================ -->
+<!--    <div class="preloader">-->
+<!--        <div class="loading-center">-->
+<!--            <div class="loading-center-absolute">-->
+<!--                <div class="object object_one"></div>-->
+<!--                <div class="object object_two"></div>-->
+<!--                <div class="object object_three"></div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+    <div class="as-mainwrapper">
+        <!-- header start -->
+        {% block header %}
+        <header class="header-area">
+            <div class="header-top-area">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5 hidden-sm hidden-xs">
+                            <div class="header-top-left">
+                                <div class="cell-letter">
+                                    <ul>
+                                        <li><span class="fa fa-phone"></span>
+                                            <a href="tel:+2349060009685" style="color: whitesmoke">+234 90 6000 9685</a> </li>
+                                        <li><span class="fa fa-envelope"></span><a href="mailto:info@enterprisehubs.com"  style="color: whitesmoke">info@enterprisehubs.com</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 hidden-sm hidden-xs mt-2">
+                            <form class="search-form" action="{% url 'search' %}" method="get">
+                                {% csrf_token %}
+                                <input class="form-control" name="search-word" type="text" placeholder="Search for Businesses" />
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                        </div>
+                        <div class="col-md-4 hidden-sm hidden-xs">
+                            <div class="header-top-right">
+                                <div class="social-icons">
+                                    <ul>
+                                        <li><a href="https://www.facebook.com/enterprisehubs01/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="linkedin.com/in/enterprise-hubs-32b91317a" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="https://www.instagram.com/enterprisehubs/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-header-area bg-white">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <a href="{% url 'home_page' %}">
+                                <img style="max-width: 300px" src="{% static 'EHUB 15-10-2019 LOGO-13.jpg' %}" alt="Enterprise Hubs">
+                            </a>
+                        </div>
+                        <div class="col-lg-9 col-md-8 hidden-sm hidden-xs">
+                            <div class="mainmenu-area">
+                                <div class="mainmenu">
+                                    <nav style="margin-left: 20px; margin-top: 25px">
+                                        <ul id="nav" style="margin-right: -30px">
+                                            <li><a href="{% url 'home_page' %}">Home</a></li>
+                                            <li><a href="#">About Us</a>
+                                                <ul class="submenu-mainmenu">
+                                                    <li><a href="{% url 'about_page' %}">About Us</a></li>
+                                                    <li><a href="{% url 'service_page' %}">Our Services</a></li>
+                                                    <li><a href="{% url 'pricing_page' %}">Our Pricing</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="{% url 'business)_directory' %}">Our Clients</a></li>
+                                            <li><a href="{% url 'gallery_page' %}">Gallery</a></li>
+                                            <li><a href="{% url 'all_blog_post' %}">Blog</a></li>
+                                            <div style="margin-top: 55px; float: right">
+                                                <a style="float: right;background-color: #87c550; border-color: #87c550" href="{% url 'login' %}" class="btn btn-success" ><i class="fa fa-sign-in"></i> Login/Register</a>
+                                                <a style="float:right; background-color: #ff2600; border-color: #ff2600; margin-right: 10px" href="{% url 'guest_booking' %}" class="btn btn-danger"><i class="fa fa-user"></i> Book A Service</a>
+                                            </div>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Area start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul>
+                                        <li><a href="{% url 'home_page' %}">Home</a></li>
+                                        <li><a href="{% url 'about_page' %}">About Us</a></li>
+                                        <li><a href="{% url 'service_page' %}">Our Services</a></li>
+                                        <li><a href="{% url 'service_page' %}">Our Clients</a></li>
+                                        <li><a href="{% url 'pricing_page' %}">Our Pricing</a></li>
+                                        <li><a href="{% url 'gallery_page' %}">Gallery</a></li>
+                                        <li><a href="{% url 'all_blog_post' %}">Blog</a></li>
+                                        <span style="margin-bottom: 50px;">
+                                            <a style="background-color: #000000;float: left; border-color: #000000 " href="{% url 'login' %}" class="btn btn-success" >Login/Register</a>
+                                            <a style="background-color: #ff2600;float: right; border-color: #ff2600" href="{% url 'guest_booking' %}" class="btn btn-danger"> Book A Service</a>
+                                        </span>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu Area end -->
+        </header>
+        {% endblock header %}
+        {% block page_content %}
+            <h1> You don't have a page content Yet!... Please add "block page_content" to your template and code!! :)</h1>
+        {% endblock page_content %}
+
+        {% block footer %}
+        <footer class="footer-area">
+            <div class="main-footer-area ptb-90">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-5 col-sm-6 col-xs-12">
+                            <div class="footer-widget address">
+                                <div class="footer-address">
+                                    <h5>CONTACT US</h5>
+                                    <div class="footer-add-icon">
+                                        <i class="fa fa-map-marker"></i>
+                                    </div>
+                                    <div class="footer-add-info">
+                                        <p>22 Water Corporation Road, <br />Off Ligali Ayorinde, Victoria Island, Lagos.</p>
+                                    </div>
+                                    <div class="footer-add-icon">
+                                        <i class="fa fa-phone"></i>
+                                    </div>
+                                    <div class="footer-add-info">
+                                        <p>+2349060009684<br>+2349060009685</p>
+                                    </div>
+                                    <div class="footer-add-icon">
+                                        <i class="fa fa-globe"></i>
+                                    </div>
+                                    <div class="footer-add-info">
+                                        <p><a href="mailto:info@enterprisehubs.com" style="color: white">info@enterprisehubs.com</a>
+                                            <br>Web : www.enterprisehubs.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 hidden-sm col-xs-12">
+                            <div class="footer-widget">
+                                <h5>OUR FEATURES</h5>
+                                <ul>
+                                    <li><a href="{% url 'service_page' %}">Cool Co-Working Spaces</a> </li>
+                                    <li><a href="{% url 'service_page' %}">Hassle Free Outsourcing</a></li>
+                                    <li><a href="{% url 'service_page' %}">Multi-site Entrepreneur Mobility</a></li>
+                                    <li><a href="{% url 'service_page' %}">Enterprise Development Resources</a></li>
+                                    <li><a href="{% url 'service_page' %}">Online B2B Exchange</a> </li>
+                                    <li><a href="{% url 'service_page' %}">World Class Virtual Offices</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 hidden-md hidden-sm col-xs-12">
+                            <div class="footer-widget">
+                                <h5>HELP &amp; SUPPORT</h5>
+                                <ul>
+                                    {% for info in info %}
+                                    <li><a href="{% url 'information' info.slug %}">{{ info.title }}</a></li>
+                                    {% endfor %}
+                                    <li><a href="{% url 'business)_directory' %}">Business Directory</a> </li>
+                                    <li><a href="{% static 'ventures_day_04_2020.pdf' %}" download>Download Ventures Day April 2020 Presentation</a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <div class="footer-widget">
+                                <h5>WE ARE SOCIAL</h5>
+                                <ul>
+                                    <li style="display: inline; padding-right: 5px">
+                                        <a style="color: white" href="https://www.facebook.com/enterprisehubs01/" target="_blank">
+                                            <div class="fa fa-facebook fa-3x"></div>
+                                        </a>
+                                    </li>
+                                    <li style="display: inline; padding-right: 5px">
+                                        <a style="color: white" href="https://www.instagram.com/enterprisehubs/" target="_blank">
+                                            <div class="fa fa-instagram fa-3x"></div>
+                                        </a>
+                                    </li>
+                                    <li style="display: inline; padding-right: 5px">
+                                        <a style="color: white" href="linkedin.com/in/enterprise-hubs-32b91317a" target="_blank">
+                                            <div class="fa fa-linkedin fa-3x"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="copyright">
+                                <script>
+                                    let date = new Date();
+                                    document.write('<p>Copyright ® ' + date.getFullYear() +  ' <a href="https://enterprisehubs.com/">Enterprise hubs</a>. All right reserved.</p>')
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        {% endblock %}
+    </div>
+
+
+{#    Javascript Declarations #}
+    <div>
+
+        <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery.meanmenu.js' %}"></script>
+        <script src="{% static 'js/wow.min.js' %}"></script>
+        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+        <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+        <script src="{% static 'js/waypoints.min.js' %}"></script>
+        <script src="{% static 'js/jquery.mb.YTPlayer.js' %}"></script>
+        <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/custom-slider/js/jquery.nivo.slider.js' %}"></script>
+        <script type="text/javascript" src="{% static 'lib/custom-slider/home.js' %}"></script>
+        <script src="{% static 'js/slick.min.js' %}"></script>
+        <script src="{% static 'js/jquery.circliful.min.js' %}"></script>
+        <script src="{% static 'js/venobox.min.js' %}"></script>
+        <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+        <script src="{% static 'js/jquery.textillate.js' %}"></script>
+        <script src="{% static 'js/jquery.lettering.js' %}"></script>
+        <script src="{% static 'js/animate-heading.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
+    </div>
+
+        {% block add_js %}
+
+        {% endblock add_js %}
+
+    </body>
+</html>

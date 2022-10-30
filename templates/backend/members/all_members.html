@@ -1,0 +1,180 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}Enterprise Hubs - Admin Portal {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        All Members
+                        <a href="{% url 'generate_sheet' None None 'member' %}">
+                            <button id="export" type="button" class="export btn btn-success">
+                                <i class="fa fa-file-excel-o"></i> Export Data
+                            </button>
+                        </a>
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <!--<li><a href="{% url 'new_member' %}">New Member</a></li>-->
+                            <li class="active">Member List</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+
+
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <section class="panel">
+                                    <div class="panel-body table-responsive">
+                                        <table class="table convert-data-table table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>
+                                                        Member ID
+                                                    </th>
+                                                    <th>
+                                                        Member Since
+                                                    </th>
+                                                    <th>
+                                                        Type
+                                                    </th>
+                                                    <th>
+                                                        Name
+                                                    </th>
+                                                    <th>
+                                                        Company
+                                                    </th>
+                                                    <th>
+                                                        Phone
+                                                    </th>
+                                                    <th>
+                                                        Expiring
+                                                    </th>
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in member_list %}
+                                                <tr>
+                                                    <td>
+                                                         {{ item.member_id }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.date_joined }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.type }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.first_name }} {{ item.last_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.business_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.phone}}
+                                                    </td>
+                                                    <td>
+                                                        {% if expiry_in_past is False and item.expire_date %}
+                                                            {{ item.expire_date }}
+                                                        {% elif expiry_in_past is True and item.expire_date %}
+                                                            {{ item.expire_date }} ago
+                                                        {% else %}
+                                                            <label class="label label-info">N/A</label>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                    {% if item.validated is False %}
+                                                        <label class="label label-warning">Not Validated</label>
+                                                    {% elif item.is_activated is False %}
+                                                        <label class="label label-danger">Not Activated</label>
+                                                    {% else %}
+                                                        {% if item.is_active is False and item.expire_date %}
+                                                            <label class="label label-dark">no access</label>
+                                                        {% elif item.is_active is False %}
+                                                            <label class="label label-danger">in-active</label>
+                                                        {% elif item.is_active is True %}
+                                                            <label class="label label-success">active</label>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.validated %}
+                                                        <a href="{% url 'member_details' item.member_id %}"><button class="btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="View Member"><i class="fa fa-eye"></i></button></a>
+                                                        {% endif %}
+                                                        <a href="{% url 'update_members' item.member_id %}"><button class="btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Edit Member Details"><i class="fa fa-edit"></i></button></a>
+                                                        <a href="{% url 'member_delete' item.member_id %}" class="confirm-delete"><button class="btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Delete Details"><i class="fa fa-trash"></i></button></a>
+                                                        {% if item.validated is True and item.is_activated is False  %}
+                                                            <a href="{% url 'activate_member' item.member_id %}"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Activate Member Account"><i class="fa fa-check"></i></button></a>
+                                                        {% elif item.validated and item.is_active is False and item.is_activated is True %}
+                                                            <a href="{% url 'reactivate_member' item.member_id %}" class="confirm-activate"><button class="btn-xs btn-info" data-toggle="tooltip" data-placement="top" title="Re-activate Account"><i class="fa fa-unlock"></i></button></a>
+                                                        {% elif item.validated %}
+                                                            <a href="{% url 'deactivate_member' item.member_id %}" class="confirm-deactivate"><button class="btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Deactivate Account"><i class="fa fa-lock"></i></button></a>
+                                                        {% endif %}
+                                                        {% if item.is_active %}
+                                                            <a href="{% url 'view_my_web_space' item.member_id %}"><button class="btn-xs btn-dark" data-toggle="tooltip" data-placement="top" title="Create Client Page"><i class="fa fa-globe"></i></button></a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+        <script src="{% static 'backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+        <script>
+        $('.input-group.date').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            allowClear: true,
+            daysOfWeekDisabled: [0]
+
+        });
+        </script>
+
+{% endblock JS %}

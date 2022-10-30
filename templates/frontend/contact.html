@@ -1,0 +1,96 @@
+{% extends 'frontend/ui_base.html' %}
+
+{% load static %}
+
+{% block page_content %}
+    <div class="main-content-wrapper">
+        <!-- banner start -->
+        <div class="banner-area about-us">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="banner-text text-center">
+                            <div class="banner-title">
+                                <h2>contact</h2>
+                            </div>
+                            <div class="breadcrumbs">
+                                <ul>
+                                    <li><a href="#">Home</a>></li>
+                                    <li>contact</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- banner end -->
+        <!-- contact start-->
+        <div class="contact-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-sm-4 col-xs-12">
+                        <div class="contact-address text-center">
+                            <div class="single-address">
+                                <div class="single-address-icon">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div class="single-address-info">
+                                    <h4>Address</h4>
+                                    <p>22 Water Corporation Road, <br />Off Ligali Ayorinde, Victoria Island, Lagos.</p>
+                                </div>
+                            </div>
+                            <div class="single-address">
+                                <div class="single-address-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="single-address-info">
+                                    <h4>phone number</h4>
+                                    <p>Telephone : +2349060009684<br>+2349060009685</p>
+                                </div>
+                            </div>
+                            <div class="single-address">
+                                <div class="single-address-icon">
+                                    <i class="fa fa-globe"></i>
+                                </div>
+                                <div class="single-address-info">
+                                    <h4>email &amp; Web</h4>
+                                    <p>Email: info@enterprisehubs.com<br>Web : www.enterprisehubs.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                        <div class="leave-comment comments">
+                            <div class="comments-title">
+                                <h4>leave a message</h4>
+                            </div>
+                            <div class="comment-form">
+                                <form id="contact-form" action="#" method="post">
+                                    <input type="text" placeholder="Your name" name="name">
+                                    <input type="text" placeholder="Email here" name="email">
+                                    <input class="f-wid" type="text" placeholder="Subject" name="subject">
+                                    <textarea cols="30" rows="9" placeholder="Write here" name="message"></textarea>
+                                    <button type="submit">submit</button>
+                                </form>
+                                <p class="form-message"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact end -->
+        <!-- map area start -->
+        <div class="map-area">
+            <!-- google-map-area start -->
+            <div class="google-map-area">
+                <!--  Map Section -->
+                <div id="contacts" class="map-area" style="width: 100% !important;">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1982.3850948035188!2d3.447173587146252!3d6.423566161949149!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf51427cd4857%3A0x61931b4bc90aba8e!2sLandmark+Centre!5e0!3m2!1sen!2sng!4v1552669266427" width="1250" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <!-- map area end -->
+    </div>
+{% endblock %}

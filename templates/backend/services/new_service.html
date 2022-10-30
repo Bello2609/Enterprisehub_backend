@@ -1,0 +1,156 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}LegalStallion - Dashboard {% endblock title %}
+{% block CSS %}
+    <!-- jQuery Steps Dependencies -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/jquery.steps/demo/css/jquery.steps.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/select2/dist/css/select2.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        Book {{ service_details.name }} Services
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+{#                            <li><a href="{% url 'login_dashboard' %}">Home</a></li>#}
+{#                            <li><a href="{% url 'client_list' %}">Client List</a></li>#}
+{#                            <li class="active">New Client</li>#}
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <form class="form-horizontal " id="serviceForm" method="post" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            {{ formset.management_form }}
+                                            {% if form.errors %}
+                                                <div class="alert alert-danger alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <span style="margin-left: 10px">{{ form.errors }}</span>
+                                                </div>
+                                            {% endif %}
+                                            <button class="btn btn-primary btn-sm pull-right add-row"><i class="fa fa-plus"> Additional Services</i></button>
+                                            <div class="form-group ">
+                                                {% if user_type is 1 %}
+                                                    <label for="facility_select" class="control-label col-lg-3" style="margin-bottom: 20px">Select Facility *</label>
+                                                    <div class="col-lg-6 " style="padding-bottom: 10px">
+                                                         <select name="facility_id" required="required" class="form-control js-example-basic-select2" id="facility_select">
+                                                             <option value="" selected>---------</option>
+                                                                {% for facility in facility %}
+                                                                  <option value="{{ facility.id }}">{{ facility.name }}</option>
+                                                                {% endfor %}
+                                                        </select>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                {% else %}
+                                                    {% if a_type == 'member' %}
+                                                        <label for="member_select" class="control-label col-lg-3" style="margin-bottom: 20px">Select Member *</label>
+                                                        <div class="col-lg-6 " style="padding-bottom: 10px">
+                                                             <select name="member_id" required="required" class="form-control js-example-basic-select2" id="member_select">
+                                                                 <option value="" selected>---------</option>
+                                                                    {% for member in member %}
+                                                                      <option value="{{ member.member_id }}">{{ member }}</option>
+                                                                    {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    {% else %}
+                                                        <label for="" class="control-label col-lg-3" style="margin-bottom: 20px">Customer Info</label>
+                                                        <div class="col-lg-3 " style="padding-bottom: 10px">
+                                                            <input class="form-control" name="customer_name" type="text" placeholder="Name">
+                                                            <small style="color: darkred">{{ form.service.error }}</small>
+                                                        </div>
+                                                        <div class="col-lg-3 " style="padding-bottom: 10px">
+                                                            <input class="form-control" name="customer_phone" type="text" placeholder="Phone" maxlength="11">
+                                                            <small style="color: darkred">{{ form.service.error }}</small>
+                                                        </div>
+                                                    {% endif %}
+                                                    <div class="clearfix"></div>
+                                                {% endif %}
+
+                                                {% if service_details.is_printable is True and a_type == 'member' %}
+                                                    <label for="facility_select" class="control-label col-lg-3" style="margin-bottom: 20px">Upload Document</label>
+                                                    <div class="col-lg-6 " style="padding-bottom: 10px">
+                                                        <input name="print_file" type="file" />
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                {% endif %}
+
+                                                {% for form in formset %}
+                                                <div id="{{ form.prefix }}-row" class="dynamic-form">
+                                                    <label for="" class="control-label col-lg-3" style="margin-bottom: 20px">Select Service *</label>
+                                                    <div class="col-lg-3 " style="padding-bottom: 10px">
+                                                        {{ form.service }}<br />
+                                                        <small style="color: darkred">{{ form.service.error }}</small>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        {{ form.quantity }}
+                                                        <small style="color: darkred">{{ form.service.error }}</small>
+                                                    </div>
+
+                                                    <span {% if forloop.first %} class="hidden"{% endif %}>
+                                                        <a id="remove-{{ form.prefix }}-row" href="javascript:void(0)"
+                                                           class="delete-row"><i style="color: darkred" class="fa fa-trash"></i> </a>
+                                                    </span>
+                                                    <br />
+                                                    <div class="clearfix"></div>
+                                                </div>
+                                                {% endfor %}
+                                                {% if service_details.is_remarkable is True %}
+                                                    <label for="facility_select" class="control-label col-lg-3" style="margin-bottom: 20px">Describe *</label>
+                                                    <div class="col-lg-6 " style="padding-bottom: 10px">
+                                                        <textarea name="is_remarkable" rows="4" cols="36" placeholder="Describe what you want"> </textarea>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-lg-offset-3 col-lg-6">
+                                                    {% if a_type == "guest" %}
+                                                    <button class="btn btn-success confirm" type="submit">Post Transaction</button>
+                                                    {% else %}
+                                                    <button class="btn btn-dark confirm" type="submit">Submit</button>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+     <!-- jQuery Steps Dependencies -->
+    <script src="{% static 'backend/bower_components/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-validation.js' %}"></script>
+    <script src="{% static 'backend/bower_components/select2/dist/js/select2.min.js' %}"></script>
+{#    <script src="{% static 'backend/assets/js/init-select2.js' %}"></script>#}
+    <script src="{% static 'js/dynamic-formset.js' %}"></script>
+    <script src="{% static 'backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+
+{% endblock JS %}
+
+
+

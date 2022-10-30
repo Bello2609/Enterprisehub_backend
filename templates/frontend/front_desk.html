@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Hubs - Registration Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/iofrm-theme15.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/iofrm-style.css' %}">
+</head>
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="{% url 'home_page' %}">
+{#                <div class="">#}
+{#                    <img style="max-width: 200px; margin-top: -40px" class="logo-size" src="{% static 'img/logo/logo.png' %}" alt="">#}
+{#                </div>#}
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg" style="background-color: white"></div>
+                <div class="info-holder">
+                    <h3 style="color: black">Welcome to Enterprise Hubs</h3>
+                    <p style="color: black; line-height: 25px !important; margin-bottom: 20px !important;">Please kindly complete our visitors form.</p>
+{#                    <p style="color: black; line-height: 25px !important; margin-bottom: 2px !important;"><strong>Green Membership: </strong> ₦10,000/ Year </p>#}
+{#                    <p style="color: black; line-height: 25px !important; margin-bottom: 2px !important;"><strong>Yellow Membership: </strong> ₦20,000/ Year </p>#}
+{#                    <p style="color: black; line-height: 25px !important; margin-bottom: 2px !important;"><strong>Black Membership: </strong> ₦100,000/ Year </p>#}
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content form-sm">
+                    <div class="form-items">
+{#                        <div class="page-links">#}
+{#                            <a href="{% url 'register_member' %}" class="active">Register</a><a href="{% url 'login' %}">Login</a>#}
+{#                        </div>#}
+                        {% if messages %}
+                            {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <span style="margin-left: 10px">{{ message }}</span>
+                                    </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                                {% if form.errors %}
+                                    <div class="alert alert-primary alert-dismissible">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <span style="margin-left: 10px">{{ form.errors }}</span>
+                                    </div>
+                                {% endif %}
+                            <div class="form-group">
+                                <label style="font-weight: bolder">Full Name <small class="text-danger">*</small></label>
+                                {{ form.name }}
+                                <label style="font-weight: bolder">Business Name</label>
+                                {{ form.business_name }}
+                                <label style="font-weight: bolder">Position</label>
+                                {{ form.position }}
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label style="font-weight: bolder">Whom to see</label>
+                                        {{ form.whom_to_see }}
+                                    </div>
+                                    <div class="col">
+                                        <label style="font-weight: bolder">Purpose of visit</label>
+                                        {{ form.purpose }}
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col">
+                                        <label style="font-weight: bolder">Phone</label>
+                                        {{ form.phone }}
+                                    </div>
+                                    <div class="col">
+                                        <label style="font-weight: bolder">How did you hear about us</label>
+                                        {{ form.how }}
+                                    </div>
+                                </div>
+
+                                <label style="font-weight: bolder">Email</label>
+                                {{ form.email }}
+                                <label style="font-weight: bolder">Business Address</label>
+                                {{ form.address }}
+                            </div>
+                            <div class="form-button text-center" style="margin-top: -5px">
+                                <button id="submit" type="submit" class="ibtn">Submit</button>
+{#                                <a href="{% url 'home_page' %}" class="btn btn-dark"> Back Home</a><br />#}
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/popper.min.js' %}"></script>
+    <script src="{% static 'forms/css/bootstrap.min.css' %}"></script>
+    <script src="{% static 'forms/js/io_forms.js' %}"></script>
+</body>
+</html>

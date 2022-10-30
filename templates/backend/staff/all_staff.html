@@ -1,0 +1,131 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}Enterprise Hub - Admin Portal {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        All Staff
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'new_staff' %}">New Staff</a></li>
+                            <li class="active">Staff List</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <section class="panel">
+
+                                    <div class="panel-body table-responsive">
+                                        <table class="table convert-data-table table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>
+                                                        Facility
+                                                    </th>
+                                                    <th>
+                                                        Username
+                                                    </th>
+                                                    <th>
+                                                        Name
+                                                    </th>
+                                                    <th>
+                                                        Phone
+                                                    </th>
+                                                    <th>
+                                                        Email
+                                                    </th>
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in staff_list %}
+                                                <tr>
+                                                    <td>
+                                                         {{ item.facility }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.username }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.first_name }} {{ item.last_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.phone}}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.email }}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.user.is_active is True %}
+                                                            <label class="label label-success">active</label>
+                                                        {% else %}
+                                                            <label class="label label-danger">de-activated</label>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'staff_details' item.facility_id item.id %}"><button class="btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="View Member"><i class="fa fa-eye"></i></button></a>
+                                                        <a href="{% url 'update_staff' item.id %}"><button class="btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Edit Staff"><i class="fa fa-edit"></i></button></a>
+                                                        {% if item.user.is_active is True %}
+                                                            <a href="{% url 'deactivate_staff' item.user_id %}" class="confirm-deactivate"><button class="btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Deactivate Account"><i class="fa fa-lock"></i></button></a>
+                                                        {% else %}
+                                                            <a href="{% url 'reactivate_staff' item.user_id %}" class="confirm-activate"><button class="btn-xs btn-warning" data-toggle="tooltip" data-placement="top" title="Activate Account"><i class="fa fa-unlock"></i></button></a>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+{#        <script src="{% static 'bower_components/datatables-tabletools/js/dataTables.tableTools.js' %}"></script>#}
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+{% endblock JS %}

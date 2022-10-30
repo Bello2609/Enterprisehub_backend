@@ -1,0 +1,85 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Welcome to Enterprise Hubs. </title>
+{% endblock page_title %}
+
+{% block add_css %}
+    <style>
+     .modal-body p {
+         font-family: initial;
+         text-align: center;
+     }
+    </style>
+{% endblock add_css %}
+
+{% block header %} {% endblock %}
+{% block page_content %}
+
+    <div class="main-content-wrapper">
+        <div class="about-reflex-area ptb-100 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center" style="margin-top: -58px; padding-bottom: 20px; border: 1px solid black; border-radius: 10px">
+                        <div class="about-reflex-info bg-white">
+                            <h2 style="background-color: #F0E661; padding: 10px; margin-right: -15px; margin-left: -15px; border-radius: 10px">Opt-in Page</h2>
+                            <img src="{% static 'img/logo/logo.jpg' %}" style="max-height: 180px"  alt="logo"/>
+                            <h2>Shaping the future of work</h2>
+                            <p>
+                               Enterprise hubs is an integrated network part of online and physical resource centers
+                                for emerging entrepreneurs and businesses.
+                            </p>
+                            <button class="btn btn-sm" id="get-started" style="background-color: #252525; color: white" >Get Started</button>
+                            <p>
+                                Already a member ?
+                                <a href="#">
+                                    <strong>Sign in</strong>
+                                </a>
+                            </p>
+
+
+                        </div>
+
+                        <div style="margin-top: 50px; display: none" id="start">
+                            <h3 class="font-weight-600">Yay! You're in the right place. <br />
+                                Let's keep you updated and motivated</h3>
+                            <div class="col-md-6 col-md-offset-3">
+                                <form action="#" method="post">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="First Name" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control" placeholder="Email Address" required />
+                                    </div>
+                                    <button type="submit" class="btn btn-sm" style="background-color: #252525; color: white">
+                                        Become a member</button>
+                                    <a href="{% url 'service_page' %}" type="submit" class="btn btn-sm btn-outline-dark" style="border: 0.2px solid black">
+                                        Explore</a>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock page_content %}
+
+{% block add_js %}
+<script>
+    $(document).ready(function(){
+      $("#get-started").click(function(){
+        $("#start").toggle('slow');
+      });
+    });
+</script>
+{% endblock add_js %}
+
+{% block footer %} {% endblock %}
+
+
+

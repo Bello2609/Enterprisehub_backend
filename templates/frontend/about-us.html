@@ -1,0 +1,146 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>About-Page | Enterprise Hubs</title>
+{% endblock page_title %}
+
+
+{% block page_content %}
+
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area about-us" style="background: url({% static 'img/about/1.jpg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>about us</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li>about us</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+                <!-- about start-->
+                <div class="about-reflex-area-two" style='margin-top: -70px'>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                                <div class="about-reflex-info default-title marg-65 text-center">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+                                            <h2>ABOUT ENTERPRISE HUBS</h2>
+                                            <p><span>Enterprise Hubs</span> owned by Pedestal Africa Limited is an integrated network of online and
+physical resource centres for emerging enterprises in Nigeria and beyond. A platform for
+promotion of businesses across Africa, offering shared workspaces, virtual offices,
+contemporary business hubs, online B2B marketplace, business support services and a
+complete suite of enterprise development services.<strong style="font-weight: bold"> A system that’s redefining the way we live, work and learn.</strong> <br />
+                                                Our private offices, dedicated desks, virtual offices and co-working spaces provide flexible
+solutions for passionate people, entrepreneurs and companies who are looking to grow and
+take advantage of what shared office space delivers especially as relating to office
+accommodation, ease of doing business, convenience and availability of facilities.</p>
+
+                                            <h2>Our Vision</h2>
+                                        <p>Creating an enterprise community for entrepreneurs to innovate, interact and succeed.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- about end -->
+                 <!-- features area start -->
+                <div class="features-area ptb-95 bg-white" style="padding-top: 0px">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title text-center">
+                                    <h2>how we work / <span>our core values</span></h2>
+                                    <p>We offer much more than just an office space</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-9 col-sm-12 col-xs-12">
+                        <div class="feature-info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="single-feature">
+                                        <h4>COMMUNITY</h4>
+                                        <p>We bring together a pool of talent, building a strong corporate culture and discovering
+extraordinary business opportunities and career paths. Our hub consists idea generators,
+innovators and game changers who possess the confidence to achieve their goals.</p>
+                                    </div>
+                                    <div class="single-feature">
+                                        <h4>CONVENIENCE</h4>
+                                        <p>Our recognition of the inherent ability to be productive from a place of convenience informs
+our offer of a one time all locations registration which enables members access the nearest
+hub locations to them.</p>
+                                    </div>
+                                    <div class="single-feature hidden-sm">
+                                        <h4>NETWORKING/<br />COLLABORATION</h4>
+                                        <p>We facilitate your growth and support you to build their networks and connect with
+likeminded people to collaborate and share ideas through great networking/collaboration
+events and opportunities that promote creativity, inspiration, growth and most importantly
+– success!</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="single-feature">
+                                        <h4>EFFICIENCY</h4>
+                                        <p>We are committed to providing all the stewardship your team need to focus on work
+essentials, save energy, efforts, money, and time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="declarations"></div>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- features-area end -->
+
+                {% if clients %}
+                <!-- client area start -->
+                    <div class="client-area ptb-70">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="default-title">
+                                        <h2>our clients / <span>clients</span></h2>
+                                        <p>Check out some brands that trust us.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="client-owl">
+                                    <div class="col-xs-12">
+                                        <div class="single-client">
+                                            <div class="single-client-img">
+                                                <a href="about-us.html#"><img src="{% static 'img/client/1.png' %}" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- client area end -->
+                {% endif %}
+            </div>
+
+
+{% endblock page_content %}
+

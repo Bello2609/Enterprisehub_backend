@@ -1,0 +1,227 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Enterprise Hub - Admin Portal {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        All Bookings
+                        <a href="{% url 'member_booking' %}" class="btn" style="background-color: darkred; color: white"> New Booking</a>
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="{% url 'member_booking' %}">New Booking</a></li>
+                            <li class="active">Member List</li>
+                        </ol>
+                    </div>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <section class="panel">
+
+                                    <div class="panel-body table-responsive">
+                                        <table class="table convert-data-table table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>
+                                                        ID
+                                                    </th>
+                                                    <th>
+                                                        Date
+                                                    </th>
+                                                    <th>
+                                                        Facility
+                                                    </th>
+                                                    <th>
+                                                        Category
+                                                    </th>
+                                                    <th>
+                                                        Unit
+                                                    </th>
+                                                    <th>
+                                                        Member ID
+                                                    </th>
+                                                    <th>
+                                                        From
+                                                    </th>
+                                                    <th>
+                                                        To
+                                                    </th>
+                                                    <th>
+                                                        Name
+                                                    </th>
+                                                    <th>
+                                                        Amount(₦)
+                                                    </th>
+                                                    <th>
+                                                        Tax(₦)
+                                                    </th>
+                                                    <th>
+                                                        Discount(₦)
+                                                    </th>
+                                                    <th>
+                                                        Payable(₦)
+                                                    </th>
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in booking_list %}
+                                                <tr>
+                                                    <td>
+                                                         #{{ item.id }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.date|date }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.facility }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.category }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.unit }}
+                                                    </td>
+                                                     <td>
+                                                         {% if item.is_member %}
+                                                         <a href="{% url 'member_details' item.member_id %}">{{ item.member_id }}</a>
+                                                         {% else %}
+                                                             GUEST
+                                                         {% endif %}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.book_from }}
+                                                    </td>
+                                                    <td>
+                                                         {% if item.book_to %}
+                                                            {{ item.book_to }}
+                                                         {% else %}
+                                                            NONE
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.is_member %}
+                                                        <a href="{% url 'member_details' item.member_id %}">{{ item.member.first_name }} {{ item.member.last_name }}</a><br />
+                                                        {% else %}
+                                                            {{ item.guest_name }}({{ item.guest_phone }} / {{ item.guest_email }})
+{#                                                                <a tabindex="0" class="btn btn-xs btn-danger fa fa-info" role="button" data-toggle="popover" data-trigger="focus" title="{{ item.guest_name }}" data-content="{{ item.guest_phone }} / {{ item.guest_email }}"></a>#}
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.payable_before_tax|intcomma }}
+                                                    </td>
+                                                    <td>
+                                                       {{ item.tax|intcomma }}
+                                                    </td>
+                                                    <td>
+                                                       {{ item.discount|intcomma }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.payable|intcomma }}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.is_secured is False %}
+                                                            <label class="label label-danger">pending</label>
+                                                        {% else %}
+                                                            <label class="label label-success">secured</label>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{% url 'guest_booking_success' item.facility_id item.id '0' %}" target="_blank" class=""><button class="btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="View Booking Details"><i class="fa fa-eye"></i></button></a>
+                                                        {% if item.is_secured is False %}
+                                                        {% if user_type is 2 %}
+                                                            <button type="button" class="btn-xs btn-warning" data-toggle="modal" data-target="#e{{ item.id }}"><i class="fa fa-money" data-toggle="tooltip" data-placement="top" title="Apply Discount"></i></button>
+                                                        {% endif %}
+                                                            <a href="{% url 'delete_booking' item.id %}" class="confirm-delete"><button class="btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Booking"><i class="fa fa-trash"></i></button></a>
+                                                            {% if item.member_id %}
+                                                                {% if user_type is 2 %}
+                                                                <a href="{% url 'secure_booking' item.id %}" class="confirm"><button class="btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Approve Booking"><i class="fa fa-check"></i></button></a>
+                                                                {% endif %}
+                                                            {% else %}
+                                                                <a href="{% url 'select_bank' item.id %}" class=""><button class="btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Select Bank"><i class="fa fa-plus"></i></button></a>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <label class="label label-success">booked</label>
+                                                        {% endif %}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           {% for item in booking_list %}
+                <div class="modal fade" id="e{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Discount Booking</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form method="post" action="{% url 'discount_booking' item.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input class="form-control" name="amount" type="number" placeholder="Enter Discount Amount" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary confirm">Submit</button>
+                              </div>
+                        </form>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+            {% endfor %}
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+{% endblock JS %}

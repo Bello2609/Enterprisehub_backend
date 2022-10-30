@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Hub - Activation Link</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/iofrm-theme15.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/iofrm-style.css' %}">
+</head>
+<body>
+    <div class="form-body">
+        <div class="website-logo">
+            <a href="{% url 'home_page' %}">
+                <div class="">
+                    <img style="max-width: 200px; background: white;" class="logo-size" src="{% static 'img/logo/logo.png' %}" alt="">
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg" style="background-color:white"></div>
+                <div class="info-holder">
+                    <h3 style="color: black">Hi, There</h3>
+                    <p style="color: black">Enter email to resend actiavation link<br>
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content form-sm">
+                    <div class="form-items">
+                        <div class="page-links">
+                            <a href="{% url 'login' %}" class="active">Login</a><a href="{% url 'register_member' %}">Register</a>
+                        </div>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <span style="margin-left: 10px"><strong>{{ form.errors }}</strong></span>
+                                </div>
+                            {% endif %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }} alert-dismissible">
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <span style="margin-left: 10px">{{ message }}</span>
+                                        </div>
+                                {% endfor %}
+                            {% endif %}
+                                {{ form.email }}
+                            <div class="form-button text-center">
+                                <button id="submit" type="submit" class="ibtn">Submit</button>
+                                <a href="{% url 'home_page' %}" class="btn btn-dark"> Back Home</a><br />
+                                <a href="{% url 'pass_reset' %}">Forget password?</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/popper.min.js' %}"></script>
+    <script src="{% static 'forms/css/bootstrap.min.css' %}"></script>
+    <script src="{% static 'forms/js/io_forms.js' %}"></script>
+
+
+</body>
+</html>
+
+
+

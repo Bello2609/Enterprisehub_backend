@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="EnterpriseHubs">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/apps" local="$PROJECT_DIR$/apps/" web="/" />
+            <mapping deploy="/dproject/templates" local="$PROJECT_DIR$/templates" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

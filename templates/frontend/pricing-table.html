@@ -1,0 +1,234 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Our Pricing | Enterprise Hubs</title>
+{% endblock page_title %}
+
+
+{% block page_content %}
+
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area about-us" style="background: url({% static 'img/about/1.png' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>Enterprise Hubs Pricing</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li><a href="{% url 'service_page' %}">services</a>></li>
+                                            <li>pricing tables</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+                <!-- pricing area start -->
+                <div class="pricing-area marg-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title">
+                                    <h2>select your price / <span>pricing</span></h2>
+                                    <!--<p>Lorem provide best service consectetur adipiscing elit, sed do eiusmod tempor dolor sit amet<br>                                         consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et lor gna aliqua. Ut enim ad minim </p> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head">
+                                        <h4>Shared Offices</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul>
+                                            <li>Starting From</li>
+                                        </ul> <br />
+                                        <h5>₦ 2,500/Day </h5>
+                                        <a href="{% url 'guest_booking' %}" class="order">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head">
+                                        <h4>Private Offices</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul>
+                                            <li>Starting From</li>
+                                        </ul> <br />
+                                        <h5>₦ 7,000/Day </h5>
+                                        <a href="{% url 'guest_booking' %}" class="order">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 hidden-md hidden-sm col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head">
+                                        <h4>Training Rooms</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul>
+                                            <li>Starting From</li>
+                                        </ul> <br />
+                                        <h5>₦ 20,000/ Day </h5>
+                                        <a href="#" class="order">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 hidden-sm col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head">
+                                        <h4>Boardrooms</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul>
+                                            <li>Starting From</li>
+                                        </ul> <br />
+                                        <h5>₦ 50,000/Day </h5>
+                                        <a href="{% url 'guest_booking' %}" class="order">Book Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-lg-3 col-md-4 hidden-sm col-xs-12">-->
+                                <!--<div class="single-pricing-table text-center">-->
+                                    <!--<div class="single-price-table-head">-->
+                                        <!--<h4>Event Courtyard</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="single-pricing-table-body">-->
+                                        <!--<ul>-->
+                                            <!--<li>Starting From</li>-->
+                                        <!--</ul> <br />-->
+                                        <!--<h5>₦ 100,000/Day </h5>-->
+                                        <!--<a href="{% url 'guest_booking' %}" class="order">Book Now</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+                <!-- pricing area end -->
+
+                <!-- choose plan area start -->
+                <div class="choose-plan marg-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="default-title">
+                                    <h2>Become a Member to enjoy even more amazing discount</h2>
+                                    <p>Get access to not just convenient work spaces but platforms for business promotion and
+solutions that improve your overall work output and the quality of your business processes
+when you become a member of Enterprise Hubs.</p>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-6">-->
+                                <!--<div class="choose-plan">-->
+                                    <!--<img src="{% static 'img/about/2.png' %}" alt="">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-area marg-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title">
+                                    <h2>Membership Type/ <span>pricing</span></h2>
+                                    <p>Subscribe to any of our affordable membership plans to enjoy amazing benefits and
+discounts for one year. Starting from just NGN 20,000/Month</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head">
+                                        <h4>Green Membership</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul>
+                                            <li>Single User Pass Only</li>
+                                            <li>Use of Hustle Hall </li>
+                                            <li>Free WiFi</li>
+                                            <li>15% Discount on Printing</li>
+                                            <li>Available to Individuals (non-corporates)</li>
+                                        </ul> <br />
+                                        <h5>₦ 20,000/Month </h5> <br />
+                                        <a href="{% url 'register_member' %}" class="order">Register Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head" style="background-color: #FFEF4E">
+                                        <h4>Yellow Membership</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul>
+                                            <li>Single User Pass Only</li>
+                                            <li>Use of Beehive </li>
+                                            <li>Free WiFi</li>
+                                            <li>25% Discount on Printing and Other Services</li>
+                                            <li>Available to Individuals (non-corporates)</li>
+                                        </ul> <br />
+                                        <h5>₦ 50,000/Month </h5> <br />
+                                        <a href="{% url 'register_member' %}" class="order">Register Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head" style="background-color: black">
+                                        <h4>Black Membership</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul style="margin: 10px 10px; line-height: 22px">
+                                            <li>Admits Two Person </li>
+                                            <li>Free WiFi</li>
+                                            <li>50% Discount on Printing and Other Services</li>
+                                            <li>Access to Enterprise Hubs Portal</li>
+                                            <li>Full Access to Hub Community</li>
+                                            <li>Available to Corporates Only</li>
+
+                                        </ul> <br />
+                                        <h5>₦ 100,000/Month </h5> <br />
+                                        <a href="{% url 'register_member' %}" class="order">Register Now</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-pricing-table text-center">
+                                    <div class="single-price-table-head" style="background-color: black">
+                                        <h4>Virtual Office</h4>
+                                    </div>
+                                    <div class="single-pricing-table-body">
+                                        <ul style="margin: 10px 10px; line-height: 22px">
+                                            <li>Business Postal Address</li>
+                                            <li>Phone Answering and Voice Mall Services</li>
+                                            <li>Access to Enterprise Hubs Portal</li>
+                                            <li>Full Access to Hub Community</li>
+                                            <li>Available to Corporates Only</li>
+
+                                        </ul> <br />
+                                        <h5>₦ 100,000/Year </h5> <br />
+                                        <a href="{% url 'register_member' %}" class="order">Register Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock page_content %}

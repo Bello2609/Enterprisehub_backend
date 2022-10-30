@@ -1,0 +1,4 @@
+<option value="">---------</option>
+{% for unit in unit %}
+<option value="{{ unit.id }}">{{ unit.name }} -- (NGN {{unit.amount}})</option>
+{% endfor %}

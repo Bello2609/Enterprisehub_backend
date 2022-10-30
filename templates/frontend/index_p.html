@@ -1,0 +1,554 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Welcome to Enterprise Hubs. </title>
+{% endblock page_title %}
+
+{% block add_css %}
+    <style>
+     .modal-body p {
+         font-family: initial;
+         text-align: center;
+     }
+    </style>
+{% endblock add_css %}
+
+{% block page_content %}
+
+    <div class="main-content-wrapper">
+
+        <!-- slider start -->
+        <div class="slider-wrap">
+            <div class="preview-2">
+                <div id="nivoslider" class="slides" style="position: relative">
+                     <!--<img src="{% static 'venture_day_slide.jpeg' %}"  alt="slide_image" title="#slider-direction-4"  />-->
+                     <img src="{% static 'slider01.jpg' %}"  alt="slide_image" title="#slider-direction-1"  />
+                     <img src="{% static 'slider02.jpg' %}"  alt="slide_image" title="#slider-direction-2"  />
+                     <img src="{% static 'slider03.jpg' %}"  alt="slide_image" title="#slider-direction-3"  />
+                </div>
+                <!-- direction 1 -->
+                <div id="slider-direction-1" class="t-cn slider-direction">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="nivo_text">
+                                    <div class="nivo_text-wrapper">
+                                        <div class="slider-content slider-text-1 text-left">
+                                            <div class="wow bounceInDown" data-wow-duration="3s" data-wow-delay="0.3s">
+                                                <h2>Welcome to Enterprise Hubs</h2>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-2 text-left hidden-xs">
+                                            <div class="wow bounceInDown" data-wow-duration="3s" data-wow-delay="0.3s">
+                                                <h1 style="font-size: 20px !important;">Your total business solution in one community! </h1>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-4 text-left hidden-sm hidden-xs">
+                                            <div class="wow bounceInLeft" data-wow-duration="3s" data-wow-delay="1s">
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-3 text-left">
+                                            <div class="wow bounceInUp" data-wow-duration="3s" data-wow-delay="1s">
+                                                <a href="{% url 'guest_booking' %}" class='slider-button' style="font-weight: bold">Book a space</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="slider-direction-2" class="t-cn slider-direction">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="nivo_text">
+                                    <div class="nivo_text-wrapper">
+                                        <div class="slider-content slider-text-1 text-left">
+                                            <div class="wow bounceInDown" data-wow-duration="3s" data-wow-delay="0.3s">
+                                                <h2 class="hidden-sm hidden-xs">We provide all you need to grow your business with our integrated six solutions system.</h2>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-2 text-left hidden-xs">
+                                            <div class="wow bounceInDown" data-wow-duration="3s" data-wow-delay="0.3s">
+                                                <h1 class="hidden-sm hidden-xs"></h1>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-4 text-left hidden-sm hidden-xs">
+                                            <div class="wow bounceInLeft" data-wow-duration="3s" data-wow-delay="1s">
+                                                <p class="hidden-sm hidden-xs"></p>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-3 text-left">
+                                            <div class="wow bounceInUp" data-wow-duration="3s" data-wow-delay="1s">
+{#                                                <a href="{% url 'guest_booking' %}" class='slider-button' style="font-weight: bold">Book a space</a>#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="slider-direction-3" class="t-cn slider-direction">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="nivo_text">
+                                    <div class="nivo_text-wrapper">
+                                        <div class="slider-content slider-text-1 text-left">
+                                            <div class="wow bounceInDown" data-wow-duration="3s" data-wow-delay="0.3s">
+                                                <h2 class="hidden-sm hidden-xs">We eliminate time constraints from your business with our extensive hours beginning from
+6:00 am, seven days a week.</h2>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-2 text-left hidden-xs">
+                                            <div class="wow bounceInDown" data-wow-duration="3s" data-wow-delay="0.3s">
+                                                <h1 class="hidden-sm hidden-xs"></h1>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-4 text-left hidden-sm hidden-xs">
+                                            <div class="wow bounceInLeft" data-wow-duration="3s" data-wow-delay="1s">
+                                                <p class="hidden-sm hidden-xs"></p>
+                                            </div>
+                                        </div>
+                                        <div class="slider-content slider-text-3 text-left">
+                                            <div class="wow bounceInUp" data-wow-duration="3s" data-wow-delay="1s">
+{#                                                <a href="{% url 'guest_booking' %}" class='slider-button' style="font-weight: bold">Book a space</a>#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- slider end -->
+
+
+        <!-- service start -->
+        <div class=" bg-white text-center bg-white hidden-sm hidden-xs" style="margin-top: -40px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="single-service">
+                            <a href="#" data-toggle="modal" data-target="#iconOne">
+                                <img style="max-height: 200px" src="{% static 'EHUBS 16-11-2019 SIXSOLUTIONS-1.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-6 col-xs-12">
+                        <div class="single-service">
+                            <a href="#" data-toggle="modal" data-target="#iconTwo">
+                                <img style="max-height: 200px" src="{% static 'EHUBS 16-11-2019 SIXSOLUTIONS-2.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hidden-sm col-xs-12">
+                        <div class="single-service">
+                            <a href="#" data-toggle="modal" data-target="#iconThree">
+                                <img style="max-height: 200px" src="{% static 'EHUBS 16-11-2019 SIXSOLUTIONS-3.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hidden-sm col-xs-12">
+                        <div class="single-service">
+                            <a href="#" data-toggle="modal" data-target="#iconFour">
+                                <img style="max-height: 200px" src="{% static 'EHUBS 16-11-2019 SIXSOLUTIONS-4.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hidden-sm col-xs-12">
+                        <div class="single-service">
+                            <a href="#" data-toggle="modal" data-target="#iconFive">
+                                <img style="max-height: 200px" src="{% static 'EHUBS 16-11-2019 SIXSOLUTIONS-5.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-md-2 hidden-sm col-xs-12">
+                        <div class="single-service">
+                            <a href="#" data-toggle="modal" data-target="#iconSix">
+                                <img style="max-height: 200px" src="{% static 'EHUBS 16-11-2019 SIXSOLUTIONS-6.png' %}" alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- service end -->
+        <!-- about start-->
+        <div class="about-reflex-area bg-white ptb-100">
+            <div class="container">
+                <div class="row">
+{#                    <div class="col-md-6 col-sm-12 col-xs-12">#}
+{#                        <div class="about-reflex-img">#}
+{#                            <img src="{% static 'six_solutions.png' %}" style="max-height: 400px" alt="">#}
+{#                        </div>#}
+{#                    </div>#}
+                    <div class="col-md-8 col-md-offset-2 text-center" style="margin-top: -58px">
+                        <div class="about-reflex-info default-title marg-65">
+                            <h2>ABOUT ENTERPRISE HUBS</h2>
+                            <p style=""><span>Enterprise Hubs</span> is an integrated network of online
+                                and physical resource centers for emerging entrepreneurs and businesses in Nigeria
+                                and beyond.
+                            </p>
+                            <p>
+                               Aiming to become a leading platform for promotion of entrepreneurship in Africa,
+                                we offer shared workspaces, virtual office services, contemporary business hubs,
+                                online business-to-business marketplace, small business support services and a complete
+                                suite of enterprise development services. Our resource centers are redefining the way
+                                entrepreneurs and innovators work, collaborate and grow.
+                            </p>
+                            <p style="">Unlike regular co-working spaces, we offer more than space and coffee.
+                                Yes, we feature picturesque spaces, huddle desks, virtual and private offices,
+                                great coffee, meeting rooms, cuddly nooks and such.</p>
+                            <a href="{% url 'about_page' %}" class="slider-button" style="font-weight: bold">read more</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- about end -->
+
+        <!-- consultation area start -->
+        <div class="consultation-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-offset-3 col-lg-7 col-md-offset-0 col-md-10 col-sm-9 col-xs-12">
+                        <div class="consultation-info default-title">
+                            <h2>WHY ENTERPRISE HUBS?</h2>
+                            <p>Enterprise Hubs has built a system to unleash collaboration, creativity and inspiration from
+passionate entrepreneurs and business people, most especially a community that promotes
+learning, collaboration and growth. Our evolutive virtual and physical offices offer a highly
+functional infrastructure, exceptional design that enhances your creativity and fosters
+productivity.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- consultation area end -->
+
+        <!-- features area start -->
+        <div class="features-area ptb-95 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="default-title">
+                            <h2>how we work / <span>our core values</span></h2>
+                            <p>We offer much more than just an office space</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-9 col-sm-12 col-xs-12">
+                        <div class="feature-info">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="single-feature">
+                                        <h4>COMMUNITY</h4>
+                                        <p>We bring together a pool of talent, building a strong corporate culture and discovering
+extraordinary business opportunities and career paths. Our hub consists idea generators,
+innovators and game changers who possess the confidence to achieve their goals.</p>
+                                    </div>
+                                    <div class="single-feature">
+                                        <h4>CONVENIENCE</h4>
+                                        <p>Our recognition of the inherent ability to be productive from a place of convenience informs
+our offer of a one time all locations registration which enables members access the nearest
+hub locations to them.</p>
+                                    </div>
+                                    <div class="single-feature hidden-sm">
+                                        <h4>NETWORKING/COLLABORATION</h4>
+                                        <p>We facilitate your growth and support you to build their networks and connect with
+likeminded people to collaborate and share ideas through great networking/collaboration
+events and opportunities that promote creativity, inspiration, growth and most importantly
+– success!</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="single-feature">
+                                        <h4>EFFICIENCY</h4>
+                                        <p>We are committed to providing all the stewardship your team need to focus on work
+essentials, save energy, efforts, money, and time.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="declarations"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- features-area end -->
+
+
+        {% if testimonial %}
+        <!-- testimonial area start -->
+                <div class="testimonial-area ptb-70 text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title text-left">
+                                    <h2>What our clients are saying / <span>testimonials</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=" col-lg-12 col-lg-offset-0 col-md-offset-1 col-md-10 col-sm-offset-0 col-sm-12">
+                                <div class="row">
+                                    <div class="col-lg-6 col-lg-offset-3 col-md-8 col-md-offset-2">
+                                        <div class="testimonial-image-slider text-center">
+                                            {% for item in testimonial %}
+                                                <div class="sin-testiImage">
+                                                    <div class="sin-opacity">
+                                                        {% if item.image %}
+                                                        <img src="{{ item.image.url }}" alt="testimonial {{ item.id }}" />
+                                                        {% else %}
+                                                        <img src="{% static 'img/team/avatar.jpg' %}" alt="testimonial {{ item.id }}" />
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="testimonial-text-slider text-center">
+                                    {% for item in testimonial %}
+                                        <div class="sin-testiText">
+                                            <h2>{{ item.name }}</h2>
+                                            <p>{{ item.content }}</p>
+                                            <span>{{ item.company }}</span>
+                                        </div>
+                                    {% endfor %}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- testimonial area end -->
+        {% endif %}
+
+        {% if blog_post %}
+        <!-- latest blog area start -->
+            <div class="latest-blog home-one  bg-white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="default-title">
+                                <h2>latest from the blog / <span>blog</span></h2>
+                                <p>We regularly publish business tips and corporate articles for your consumption</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        {% for blog in blog_post %}
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="single-latest-blog">
+                                    <div class="single-latest-blog-img">
+                                        <img src="{{ blog.image.url }}" alt="">
+                                        <div class="single-latest-blog-date">
+                                            <h4>{{ blog.date.date.day }}</h4>
+                                            <h6>{{ blog.date.date|date:"M" }}</h6>
+                                        </div>
+                                        <a href="{% url 'blog_details' blog.slug %}" class="read-more" style="font-weight: bold">read-more</a>
+                                    </div>
+                                    <div class="single-latest-blog-info">
+                                        <h4><a href="{% url 'blog_details' blog.slug %}">{{ blog.title }}</a></h4>
+                                        <h6>{{ blog.user }} / {{ blog.category }}, at {{ blog.date.time }}</h6>
+                                        <p style="word-wrap: normal">{{ blog.content|safe|truncatechars:120 }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if blog_count > 0 %}
+                    <div style="padding-top: 20px;padding-bottom: 20px; text-align: center; font-weight: bold">
+                        <a href="{% url 'all_blog_post' %}" class="slider-button">View All Post</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- latest blog area end -->
+         {% endif %}
+
+        {% if client_logo %}
+        <!-- client area start -->
+                <div class="client-area ptb-70">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title">
+                                    <h2>our clients / <span>clients</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="client-owl">
+                                {% for logo in client_logo %}
+                                    <div class="col-xs-12">
+                                        <div class="single-client">
+                                            <div class="single-client-img">
+                                                <a href="{{ logo.url|default_if_none:"#" }}" target="_blank"><img src="{{ logo.logo.url }}" alt=""></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- client area end -->
+        {% endif %}
+
+    </div>
+
+    <div class="modal fade" id="iconOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">World Class virtual Office</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p>Never be out of reach. <br />
+              Build your empire from anywhere in the world with our world class virtual office
+              solutions.<br  />
+              Access important data and documents anytime, anywhere with our virtual storage platform.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="iconTwo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Cool Coworking Spaces</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p>
+                Whether it’s our shared offices or private offices, they are designed to encourage inspiration,
+                creativity and productivity – and reflect your company’s culture of excellence and innovation.
+                Our spaces are built with comfort and productivity in mind and our flexible system provides extensive
+                work hours (6:00am -9:00 pm),  all inclusive amenities (fast Wi-Fi, coffee, 7 days a week access) are
+                designed to enable you focus on what matters.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="iconThree" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Enterprise Development Resources</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+                Enterprise Development Resources We are committed to providing you all the support you need to grow
+                your business. Our monthly enterprise event added to the enterprise club is created to facilitate
+                constant learning and new connections.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="iconFour" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Hassle-free Outsourcing</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+                We take care of all your outsourcing needs so you can focus your energies on more strategic and value
+                adding enterprise activities. We also provide concierge services that ensures your time is fully
+                maximised for business growth.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="iconFive" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Online B2B Exchange</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+                We believe in your business which is why we provide an online platform for you to communicate your
+                offerings, interact with your clients and conclude transactions to ultimately grow your business.
+                We offer you the visibility you need to succeed.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="iconSix" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Multi-Site Entrepreneur Mobility</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>
+                With our multi-site solutions, a single subscription affords you seamless access to all our hubs
+                across various locations. We save you time and stress, so work productivity is assured regardless
+                of your location.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock page_content %}
+
+
+

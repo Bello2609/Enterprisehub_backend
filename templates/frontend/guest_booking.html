@@ -1,0 +1,205 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+    {% block extra_css %}
+        <link rel="stylesheet" href="{% static 'backend/bower_components/jquery.steps/demo/css/jquery.steps.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/select2/dist/css/select2.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+        <style>
+        .datepicker table tr td.disabled,
+        .datepicker table tr td.disabled:hover {
+          background: #ff2600;
+          color: #FFFFFF;
+          cursor: default;
+            }
+        </style>
+    {% endblock extra_css %}
+
+    {% block main %}
+
+        <div class="page-title-area" style="background-image: url({% static 'new_front/assets/images/services/service_4.jpg' %})">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>Reserve Your Space
+                            </h2>
+                            <ul>
+                                <li>Yes, you have the flexibility of picking out your own space
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="{% static 'new_front/assets/images/bookings.jpg' %}">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-items">
+                        {% if messages %}
+                            {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible">
+{#                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+                                        <span style="margin-left: 10px">{{ message }}</span>
+                                    </div>
+                            {% endfor %}
+                        {% endif %}
+                        <form class="form-horizontal " id="commentForm" method="post"  >
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <span style="margin-left: 10px">{{ form.errors }}</span>
+                                </div>
+                            {% endif %}
+                            <div class="form-group ">
+                                <label for="select_type" class="control-label col-lg-12">Facility <span style="color: darkred">*</span></label>
+                                <div class="col-lg-12">
+                                    {{ form.facility }}
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="select_type" class="control-label col-lg-12">Category <span style="color: darkred">*</span></label>
+                                <div class="col-lg-12">
+                                    {{ form.category }}
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label for="select_type" class="control-label col-lg-12">Unit <span style="color: darkred">*</span></label>
+                                <div class="col-lg-12">
+                                    {{ form.unit }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-lg-6" style="float: left;">
+                                    <label for="email" class="control-label col-lg-12">Book-From<span style="color: darkred">*</span></label>
+                                    <div class="input-group date data-date=" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        {{ form.book_from }}
+                                         <span style="max-width: 40px" class="form-control input-group-addon bg-success text-white"><i class="glyphicon glyphicon-th fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="col-lg-6" style="float: right">
+                                    <label for="email" class="control-label col-lg-12">Book-To </label>
+                                    <div class="input-group date data-date=" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                        {{ form.book_to }}
+                                         <span style="max-width: 40px"  class="form-control input-group-addon bg-success text-white"><i class="glyphicon glyphicon-th fa fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 100px">
+                                <div class="col-lg-6" style="float: left;">
+                                    <label for="select_type" class="control-label">Full Name <span style="color: darkred">*</span></label>
+
+                                    {{ form.guest_name }}
+                                </div>
+                                <div class="col-lg-6" style="float: right;">
+                                    <label for="select_type" class="control-label">Phone No <span style="color: darkred">*</span></label>
+
+                                    {{ form.guest_phone }}
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-top: 200px">
+                                <label for="select_type" class="control-label col-lg-12">Email <span style="color: darkred">*</span></label>
+                                <div class="col-lg-12">
+                                    {{ form.guest_email }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-button text-center" style="margin-top: -5px">
+                                    <button id="submit" type="submit" class="ibtn btn btn-success">Book Now</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    {% endblock main %}
+
+    {% block extra_js %}
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script>
+    $("#id_facility").change(function () {
+
+      let facility_id = $(this).val();
+
+      $.ajax({
+
+        url: {% url 'ajax_load_cat' %},
+        data: {
+          'facility': facility_id
+        },
+
+        success: function (data) {
+          $("#id_category").html(data);
+        },
+
+      });
+    });
+
+    </script>
+
+    <script>
+
+    $("#id_category").change(function () {
+        let category_id = $(this).val();
+
+        $.ajax({
+
+        url: {% url 'ajax_load_unit' %},
+        data: {
+          'category': category_id
+        },
+
+        success: function (data) {
+          $("#id_unit").html(data);
+        },
+      });
+    });
+    </script>
+
+    <script>
+
+    $("#id_unit").change(function () {
+
+        let unit_id = $(this).val();
+
+        $.ajax({
+            url: {% url 'unit_booked_date' %},
+            data: {
+                'unit': unit_id,
+             },
+
+            success: function (data) {
+                let ArrVar = data.split("\n");
+
+                $('.input-group.date').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    allowClear: true,
+                    datesDisabled: ArrVar,
+                    daysOfWeekDisabled: [0]
+
+                });
+            },
+
+        })
+    });
+
+    $('.alert').alert()
+    </script>
+    {% endblock extra_js %}

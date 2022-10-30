@@ -1,0 +1,148 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Enterprise Hub - Admin Portal {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        All Services
+                        {% if user_type is 2 %}
+                            <a href="{% url 'select_service' 'member' %}" class="btn" style="background-color: darkred; color: white"> Member Service</a>
+                            <a href="{% url 'select_service' 'guest' %}" class="btn btn-primary"> Guest Service</a>
+                        {% endif %}
+                    </h4>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <section class="panel">
+
+                                    <div class="panel-body table-responsive">
+                                        <table class="table convert-data-table table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>
+                                                        ID
+                                                    </th>
+                                                    <th>
+                                                        Facility
+                                                    </th>
+                                                    <th>
+                                                        Service
+                                                    </th>
+                                                    <th>
+                                                        Member
+                                                    </th>
+                                                    <th>
+                                                        Date
+                                                    </th>
+                                                    <th>
+                                                        Pay Status
+                                                    </th>
+                                                    <th>
+                                                        Status
+                                                    </th>
+                                                    <th>
+                                                        Action
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in object_list %}
+                                                <tr>
+                                                    <td>
+                                                         #{{ item.id }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.facility }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.service_cat.name }}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.member_id %}
+                                                        <a href="{% url 'member_details' item.member_id %}">{{ item.member }}</a>
+                                                        {% else %}
+                                                        Guest
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.date|naturaltime }}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.payment_status is False %}
+                                                            <label class="label label-danger">Unpaid</label>
+                                                        {% else %}
+                                                            <label class="label label-success">Paid</label>
+                                                        {% endif %}
+                                                    </td>
+                                                    <td>
+                                                        {% if item.is_completed is False %}
+                                                            <label class="label label-danger">Pending</label>
+                                                        {% else %}
+                                                            <label class="label label-success">Completed</label>
+                                                        {% endif %}
+                                                    </td>
+
+                                                    <td>
+                                                        <a href="{% url 'view_booked_services' item.id %}"><button class="btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="View Service Details"><i class="fa fa-eye"></i></button></a>
+                                                        {% if item.is_completed is False %}
+                                                            {% if item.payment_status is False %}
+                                                                <a href="{% url 'service_delete' item.id %}" class="confirm-delete"><button class="btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Delete Service"><i class="fa fa-trash"></i></button></a>
+                                                            {% else %}
+                                                                {% if user_type is 2 %}
+                                                                <a href="{% url 'complete_service' item.id %}" class="confirm"><button class="btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Complete Transaction"><i class="fa fa-check"></i></button></a>
+                                                                {% else %}
+                                                                    <label class="label label-success">Paid</label>
+                                                                {% endif %}
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <label class="label label-success">Completed</label>
+                                                        {% endif %}
+
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+{% endblock JS %}

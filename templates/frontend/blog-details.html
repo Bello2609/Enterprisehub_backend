@@ -1,0 +1,82 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Blog Detail | {{ object.title }}</title>
+{% endblock page_title %}
+
+
+{% block page_content %}
+
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area blog style-two" style="background: url({% static 'img/banner/slide2.jpg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text">
+                                    <div class="banner-title">
+                                        <h2>blog details</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li><a href="{% url 'all_blog_post' %}">Blog</a>></li>
+                                            <li>details</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+                <!-- blog details area start -->
+                <div class="blog-details marg-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                                <div class="single-latest-blog bg-white">
+                                    <div class="single-latest-blog-img">
+                                        <img src="{{ object.image.url }}" alt="">
+                                        <div class="single-latest-blog-date">
+                                            <h4>{{ object.date.date.day }}</h4>
+                                            <h6>{{ object.date.date|date:"M" }}</h6>
+                                        </div>
+                                    </div>
+                                    <div class="single-latest-blog-info">
+                                        <h4>{{ object.title }}</h4>
+                                        <h6>{{ object.user.first_name }} / {{ object.category }}, at {{ object.date.time }}</h6>
+                                        <p>
+                                        {{ object.content|safe }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <!--Comment can come here -->
+                            </div>
+
+                            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                                <div class="blog-sidebar">
+                                    <div class="blog-single-sidebar">
+                                         <h3>latest post</h3>
+                                        {% for blog in latest_blog %}
+                                            <div class="latest-post-img">
+                                                <img style="max-width: 70px" src="{{ blog.image.url }}" alt="">
+                                            </div>
+                                            <div class="latest-post-info">
+                                                <h4><a href="{% url 'blog_details' blog.slug %}">{{ blog.title }}</a></h4>
+                                                <h6>{{ blog.user.first_name }}/{{ blog.date.date }}</h6>
+                                                <p>{{ blog.content|safe|truncatechars:70 }}</p>
+                                            </div>
+                                        {% endfor %}
+
+                                    </div>
+
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+                <!-- blog area end -->
+            </div>
+{% endblock page_content %}

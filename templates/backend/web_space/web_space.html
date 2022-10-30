@@ -1,0 +1,184 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}LegalStallion - Dashboard {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+        <!--product gallery-->
+        <link rel="stylesheet" href="{% static 'backend/assets/js/product-gallery/css/style.css' %}">
+        <script src="{% static 'backend/assets/js/product-gallery/js/modernizr.js' %}"></script>
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        Web Space
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        {% if web_space %}
+                            <a href="{% url 'edit_my_web_space' web_space.id %} "><button class="btn btn-danger" style="font-weight: bold">Edit Web Space</button></a>
+                            {% if portfolio_count != 9 %}
+                                <a href="#myModal" data-toggle="modal" style="font-weight: bold" class="btn btn-primary">Add Portfolio</a>
+                            {% endif %}
+                                <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                                                <h4 class="modal-title">You have used {{ portfolio_count }} of 9</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form role="form" method="POST" action="#" enctype="multipart/form-data">
+                                                    {% csrf_token %}
+                                                    <div class="form-group">
+                                                        <label>Title</label>
+                                                        {{ form.title }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Services</label>
+                                                        {{ form.client }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Describe what you did</label>
+                                                        {{ form.desc }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Image</label>
+                                                        {{ form.image }}
+                                                        <small style="color: darkred">You want nice images? Please upload image with dimension 600px × 700px </small>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-warning">Upload</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                    {% if web_space %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel profile-wrap">
+{#                                    <header class="panel-heading clearfix">#}
+{#                                        <h3 class="profile-title pull-left">{{ object.first_name }} {{ object.last_name }} Profile</h3>#}
+{#                                    </header>#}
+                                    <div class="panel-body row">
+                                        <div class="col-md-4">
+                                            <div class="profile-thumb">
+                                                {% if web_space.image %}
+                                                    <img src="{{ web_space.image.url }}" alt=""/>
+                                                {% else %}
+                                                    <img src="https://via.placeholder.com/594x1032">
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="profile-tabs">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#tab1"data-toggle="tab" >About</a></li>
+                                                    <li class=""><a href="#tab2"data-toggle="tab">Portfolio</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="tab1" class="tab-pane fade in active">
+                                                        <p>
+                                                            {{ web_space.about_us|safe }}
+                                                        </p>
+                                                        <br />
+                                                        <h3>Social Links</h3>
+                                                        <span class="fa fa-facebook"></span>: {{ web_space.facebook }} <br />
+                                                        <span class="fa fa-instagram"></span>: {{ web_space.instagram }} <br />
+                                                        <span class="fa fa-google-plus"></span>: {{ web_space.google_plus }} <br />
+                                                        <span class="fa fa-linkedin"></span>: {{ web_space.linkedin }} <br />
+                                                        <h3>WebSpace Link</h3>
+                                                        <span class="fa fa-globe"></span>: www.enterprisehubs.com/{{ web_space.url_identifier }}
+                                                        <a href="{% url 'member_web_space' web_space.slug %}" target="_blank"><button class="btn btn-default btn-xs">view site</button></a>
+                                                        <br />
+                                                    </div>
+                                                    <div id="tab2" class="tab-pane fade in ">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="panel">
+                                                                    <header class="panel-heading">
+                                                                        <span class="tools pull-right">
+                                                                            <a class="refresh-box fa fa-repeat" href="javascript:;"></a>
+                                                                            <a class="collapse-box fa fa-chevron-down" href="javascript:;"></a>
+                                                                            <a class="close-box fa fa-times" href="javascript:;"></a>
+                                                                        </span>
+                                                                    </header>
+                                                                    {% if portfolio %}
+                                                                    <div class="panel-body">
+                                                                        <ul class="cd-items cd-container">
+                                                                            {% for item in portfolio %}
+                                                                            <li class="cd-item">
+                                                                                <a href="{% url 'delete_portfolio' item.id %}" class="confirm-delete"><span style="color: darkred" class="fa fa-trash"></span></a>
+                                                                                <img src="{{ item.image.url }}" alt="Item Preview">
+                                                                            </li> <!-- cd-item -->
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    </div>
+                                                                    {% else %}
+                                                                    <h2>No item added yet</h2>
+                                                                    {% endif %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+
+                        <center>
+                            <h2>Need help setting up your web-space? <br />
+                        <a href="{% url 'request_setup' member_id %}" class="confirm-request"><button class="btn btn-danger">Request Help</button> </a><br /><br />
+                            OR <br /><br />
+                         you can set up yourself <br />
+                        <a href="{% url 'build_web_space' %}"><button class="btn btn-success">Set Up Now</button> </a>
+                                </h2>
+                        </center>
+                    {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+{#        <script src="{% static 'bower_components/datatables-tabletools/js/dataTables.tableTools.js' %}"></script>#}
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+        <!--product gallery-->
+        <script src="{% static 'backend/assets/js/product-gallery/js/velocity.min.js' %}"></script>
+        <script src="{% static 'backend/assets/js/product-gallery/js/main.js' %}"></script>
+
+
+
+{% endblock JS %}

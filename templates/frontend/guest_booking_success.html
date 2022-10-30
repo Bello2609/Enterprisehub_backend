@@ -1,0 +1,214 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+        <title>{{ object.guest_name|default_if_none:"Detail" }} Booking Payment</title>
+
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/simple-line-icons/css/simple-line-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/weather-icons/css/weather-icons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/themify-icons/css/themify-icons.css' %}">
+
+        <!-- Main Style  -->
+        <link rel="stylesheet" href="{% static 'backend/dist/css/main.css' %}">
+
+        <script src="{% static 'backend/assets/js/modernizr-custom.js' %}"></script>
+    </head>
+    <body style="background: white">
+{#        <div class="expired">#}
+{#            <a href="{% url 'home_page' %}">#}
+{#                 <img style="margin-top: 15px; max-width: 200px; margin-left: -3px;" src="{% static 'img/logo/logo.png' %}" alt="enterprisehubs logo"/>#}
+{#            </a>#}
+{#        </div>#}
+        <br />
+        <div class="container" style="background: #262626">
+            <!--page title and breadcrumb start -->
+            <div class="row">
+                <div class="col-md-8">
+                    <h1 class="page-title" style="color: white; margin: 10px"> Booking Details
+                    </h1>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <section class="panel">
+                                    {% if messages %}
+                                        {% for message in messages %}
+                                                <div class="alert alert-{{ message.tags }} alert-dismissible">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <span style="margin-left: 10px">{{ message }}</span>
+
+                                                </div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    <div class="panel-body ">
+
+                                        <table class="table  table-hover general-table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Created Date: </strong>
+                                                    </td>
+                                                    <td>
+                                                        {{ object.date }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Booked for</strong></td>
+                                                    <td>{{ object.facility }} - {{ object.category }} - {{ object.unit }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Start Date:</strong></td>
+                                                    <td>{{ object.book_from|date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>End Date</strong></td>
+                                                    <td>{{ object.book_to|date }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Unit Amount</strong></td>
+                                                    <td>₦ {{ object.unit.amount|intcomma }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total</strong></td>
+                                                    <td>₦ {{ object.payable_before_tax|intcomma }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Tax</strong></td>
+                                                    <td>₦ {{ object.tax|intcomma }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Discount</strong></td>
+                                                    <td>₦ {{ object.discount|intcomma }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Amount Payable</strong></td>
+                                                    <td>₦ {{ object.payable|intcomma }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Payment Status</strong></td>
+                                                    {% if object.is_secured is True %}
+                                                    <td><label class="label label-success">Paid</label><br /></td>
+                                                    {% else %}
+                                                    <td><label class="label label-danger">UnPaid</label>
+                                                        {% if not object.is_member %}
+                                                    <a href="{% url 'guest_payment_resources' object.id  %}"><button type="button" class="btn btn-primary btn-xs"> Pay Online </button></a></td>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                </tr>
+                                                {% if object.is_secured is False %}
+                                                <tr>
+                                                    <td><strong>Note:</strong></td>
+                                                    <td style="color: darkred">Thanks you <br />
+                                                        Your booking is only active for 24 hours. If payment is not made within 24 hours, booking will automatically cancel</td>
+                                                </tr>
+                                                <!--<tr>-->
+                                                    <!--<td><strong>Ster:</strong></td>-->
+                                                    <!--<td>00500023434</td>-->
+                                                <!--</tr>-->
+
+                                                {% endif %}
+
+                                            </tbody>
+
+                                        </table>
+                                        <br />
+                                        <div class="text-center">
+                                            <a href="#" onclick="window.print()"><button type="button" class="btn btn-danger"><i class="fa fa-print"></i> Print </button></a>
+{#                                            {% if not object.is_member %}#}
+{#                                                <a href="{% url 'home_page' %}"><button type="button" class="btn btn-default"> Back to Homepage </button></a>#}
+{#                                            {% endif %}#}
+                                        </div>
+                                    </div>
+                                </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                        <h4 class="modal-title">Change Package Type</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form method="post" action="#">
+                            {% csrf_token %}
+                            <label>Select Package </label>
+                            {{ form.upgrade_type }}
+                            <br />
+                            <button class="btn btn-default">Submit</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- inject:js -->
+        <script src="{% static 'backend/bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/autosize/dist/autosize.min.js' %}"></script>
+        <!-- endinject -->
+
+        <!-- Common Script   -->
+        <script src="{% static 'backend/dist/js/main.js' %}"></script>
+
+        <script src="https://js.paystack.co/v1/inline.js"></script>
+
+        {% if ref_id %}
+        <script>
+          function payWithPaystack(){
+            var handler = PaystackPop.setup({
+              key: 'pk_live_7980f72e6b3b3ddfb2e80805665810c86a07f4f4',
+              {#key: 'pk_test_f3bb813157b3ac821a2a7a43b5a86dcfb0cd1fcb',#}
+              email: '{{ object.guest_email }}',
+              amount: {{ object.payable|floatformat:0 }}00,
+              ref: '{{ ref_id }}',
+              metadata: {
+                 custom_fields: [
+                    {
+                        display_name: "Mobile Number",
+                        variable_name: "mobile_number",
+                        value: "+2348012345678"
+                    }
+                 ]
+              },
+              callback: function(response){
+                  {% if ref_id %}
+                  window.location = '{% url 'guest_verify_payment' ref_id object.id  %}';
+                  {% endif %}
+
+              },
+              onClose: function(){
+                window.location = '{% url 'guest_booking_success' object.facility_id object.id '0' %}';
+          }
+            });
+            handler.openIframe();
+          };
+          window.onload = payWithPaystack()
+
+        </script>
+    {% endif %}
+
+    </body>
+</html>

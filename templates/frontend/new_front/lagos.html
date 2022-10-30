@@ -1,0 +1,54 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{#{% block logo %} <img width="250" src="{% static 'new_front/assets/images/qsc1.png' %}"  alt="logo"/> {% endblock %}#}
+{#{% block mini_logo %} <img width="400" src="{% static 'new_front/assets/images/qsc1.png' %}"  alt="logo"/> {% endblock %}#}
+
+{% block main %}
+        <div class="page-title-area item-bg3" style="background-color: #252525">
+{#        <div class="page-title-area item-bg3" style="background-image: url({% static 'new_front/assets/images/about_us.jpg' %})">#}
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>Welcome to Enterprise Hubs Lagos</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services-details-area ptb-100">
+            <div class="container">
+                <div class="services-details-overview">
+                    <div class="services-details-desc">
+                        <img src="" />
+                        <h3>Enterprise Hubs Victoria Island</h3>
+                        <p style="text-align: justify">
+                        A serene privately managed co-working facility and entrepreneurship support center,
+                            offering virtual office services, co-working spaces, private offices, meeting facilities,
+                            a garden and hosting entrepreneurship programs and resources. </p>
+                        <p>
+                        Located in Victoria Island, downtown Lagos Nigeria, we boast of super-fast fiber optic
+                            internet, ample parking and dining spaces and roomy workspaces.
+                            Enterprise Hubs also offers back-office professional services to support entrepreneurs
+                            and innovators. </p>
+                            <p>Our virtual office service gives you a prestigious business address without the hassle of renting and equipping one yourself.
+                                This service is synchronized with our Abuja and Kano centers, giving you the option of one or
+                                all business addresses in the top 3 cities in Nigeria.</p>
+                        <p>Our digital portal allows you to search, select, book, and pay for spaces and services from the comfort of your device. </p>
+
+                        </p>
+                    </div>
+                    <div class="services-details-image">
+                        <img src="https://www.enterprisehubs.com/static/new_front/assets/images/place-img1.jpg" alt="image" />
+                    </div>
+                </div>
+                <div>
+                    <a href="{% url 'guest_booking' %}" class="btn btn-danger text-white">Get Started</a>
+                </div>
+
+            </div>
+        </section>
+
+{% endblock main %}

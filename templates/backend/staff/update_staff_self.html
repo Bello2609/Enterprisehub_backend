@@ -1,0 +1,69 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}Enterprise Hubs Admin {% endblock title %}
+{% block CSS %}
+    <!-- jQuery Steps Dependencies -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/jquery.steps/demo/css/jquery.steps.css' %}">
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        Hey {{ staff.first_name }} {{ staff.last_name }} <br />
+                        Please update your profile below
+                    </h4>
+                </div>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel">
+                                    <div class="panel-body">
+                                        <form id="step-advanced-form" method="post" action=" " class="wizard-long" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                                <label style="color: darkred; margin-left: 20px" >{{ form.errors }}</label>
+                                            <fieldset>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label for="surname-2">Change Phone *</label>
+                                                        {{ form.phone }}
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="profile_image">Change Profile Image </label>
+                                                        {{ form.image }}
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <span><button type="submit" class="btn btn-primary">SAVE</button></span>
+
+                                        </form>
+
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+     <!-- jQuery Steps Dependencies -->
+    <script src="{% static 'backend/bower_components/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'backend/bower_components/jquery.steps/build/jquery.steps.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-jquery.steps.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-validation.js' %}"></script>
+
+{% endblock JS %}

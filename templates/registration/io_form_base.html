@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Hub - Login Form</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/iofrm-theme15.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'forms/css/iofrm-style.css' %}">
+</head>
+<body>
+    <div class="form-body">
+        <div class="website-logo mb-5">
+            <a href="{% url 'home_page' %}">
+                <div class="">
+                    <img style="max-width: 280px;" class="logo-size" src="{% static 'img/logo/logo.jpg' %}" alt="">
+                </div>
+            </a>
+        </div>
+        {% block main %}
+
+        {% endblock main %}
+
+        </div>
+    <script src="{% static 'forms/js/jquery.min.js' %}"></script>
+    <script src="{% static 'forms/js/popper.min.js' %}"></script>
+    <script src="{% static 'forms/css/bootstrap.min.css' %}"></script>
+    <script src="{% static 'forms/js/io_forms.js' %}"></script>
+
+
+</body>
+</html>

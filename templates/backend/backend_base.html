@@ -1,0 +1,440 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+        <title>Home</title>
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/simple-line-icons/css/simple-line-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/weather-icons/css/weather-icons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/themify-icons/css/themify-icons.css' %}">
+        <!-- endinject -->
+        <!-- Main Style  -->
+        <link rel="stylesheet" href="{% static 'backend/dist/css/main.css' %}">
+        <!--horizontal-timeline-->
+        <link rel="stylesheet" href="{% static 'backend/assets/js/horizontal-timeline/css/style.css' %}">
+        <script src="{% static 'backend/assets/js/modernizr-custom.js' %}"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Poppins');
+        </style>
+        <style>
+
+            #loading {
+              display: block;
+              position: absolute;
+              top: 0;
+              left: 0;
+              z-index: 100;
+              width: 100vw;
+              height: 100vh;
+              background-color: rgba(192, 192, 192, 0.5);
+              background-image: url("https://i.stack.imgur.com/MnyxU.gif");
+              background-repeat: no-repeat;
+              background-position: center;
+            }
+        </style>
+        {% block CSS %}
+
+        {% endblock CSS %}
+
+    </head>
+    <body style="font-family: 'Poppins', sans-serif;" class="page">
+
+        <div id="ui" class="ui">
+
+            <!--header start-->
+            <header id="header" class="ui-header">
+
+                <div class="navbar-header">
+                    <!--logo start-->
+                    <a href="#" class="navbar-brand">
+                        <span class="logo"><h2 style="margin-top: 0px; font-size: 20px; text-align: center">Enterprise Hubs®</h2></span>
+{#                        <img style="max-height: 45px; margin-top: 0px" src="{% static 'img/logo/logo.png' %}">#}
+                        <span class="logo-compact"><h3 style="margin-top: 0px; font-size: 10px">HUBS®</h3></span>
+                    </a>
+                    <!--logo end-->
+                </div>
+
+                <div class="navbar-collapse nav-responsive-disabled">
+
+                    <!--toggle buttons start-->
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a class="toggle-btn" data-toggle="ui-nav" href="#">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- toggle buttons end -->
+
+                    <!--notification start-->
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user_type is 2 %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="badge">{{ total_notif }}</span>
+                            </a>
+                            <!--dropdown -->
+                            <ul class="dropdown-menu dropdown-menu--responsive">
+                                <div class="dropdown-header">Notifications ({{ total_notif }})</div>
+                                <ul class="Notification-list Notification-list--small niceScroll list-group">
+
+                                   {% if unsecured_bookings %}
+                                        {% for notif in unsecured_bookings %}
+                                            <li class="Notification list-group-item">
+                                                <button class="Notification__status Notification__status--read" type="button" name="button"></button>
+                                                <a href="{% url 'all_bookings' %}">
+                                                    <div class="Notification__avatar Notification__avatar--info pull-left" href="">
+                                                        <i class="Notification__avatar-icon fa fa-bookmark"></i>
+                                                    </div>
+                                                    <div class="Notification__highlight">
+                                                        {% if notif.member %}
+                                                        <p class="Notification__highlight-excerpt"><b>{{ notif.member }}</b></p>
+                                                            {% else %}
+                                                            <p class="Notification__highlight-excerpt"><b>{{ notif.guest_name }} booking is pending</b></p>
+                                                        {% endif %}
+                                                        <p class="Notification__highlight-time">{{ notif.date|timesince }} ago</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    {% if services_n_completed %}
+                                        {% for notif in services_n_completed %}
+                                            <li class="Notification list-group-item">
+                                                <button class="Notification__status Notification__status--read" type="button" name="button"></button>
+                                                <a href="{% url 'service_booking_list' %}">
+                                                    <div class="Notification__avatar Notification__avatar--primary pull-left" href="">
+                                                        <i class="Notification__avatar-icon fa fa-cog"></i>
+                                                    </div>
+                                                    <div class="Notification__highlight">
+                                                        {% if notif.member %}
+                                                        <p class="Notification__highlight-excerpt"><b>{{ notif.member }} services is pending</b></p>
+                                                            {% else %}
+                                                            <p class="Notification__highlight-excerpt"><b>{{ notif.guest_name }} booking is pending</b></p>
+                                                        {% endif %}
+                                                        <p class="Notification__highlight-time">{{ notif.date|timesince }} ago</p>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+
+
+                                </ul>
+                                <div class="dropdown-footer"><a href="#">View more</a></div>
+                            </ul>
+                            <!--/ dropdown -->
+                        </li>
+                        {% endif %}
+
+                        <li class="dropdown dropdown-usermenu">
+                            <a href="##" class=" dropdown-toggle fa fa-cog" data-toggle="dropdown" aria-expanded="true">
+                                <span class="hidden-sm hidden-xs">Account Settings</span>
+                                <!--<i class="fa fa-angle-down"></i>-->
+                                <span class="caret hidden-sm hidden-xs"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                                {% if user_type is 2 %}
+                                <li><a href="{% url 'update_self' staff.facility_id staff.id %}"><i class="fa fa-user"></i>  Profile Settings</a></li>
+                                {% else %}
+                                    <li><a href="{% url 'member_self_update' member_id %}"><i class="fa fa-user"></i>  Profile Settings</a></li>
+                                    <li><a href="{% url 'member_account' member_id %}"><i class="fa fa-money"></i>  Payment and Renewal</a></li>
+                                {% endif %}
+                                <li class="divider"></li>
+                                <li><a href="{% url 'change_password' %}"><i class="fa fa-lock"></i> Change Password</a></li>
+                                <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                    <!--notification end-->
+                </div>
+            </header>
+            <!--header end-->
+            <!--sidebar start-->
+            <aside id="aside" class="ui-aside"  style="background: #262626">
+                <ul class="nav" ui-nav>
+                    <li class="nav-head">
+{#                        <h5 class="nav-title text-uppercase light-txt">Navigation</h5>#}
+                    </li>
+                    {% if user_type is 2 %}
+                        {% if is_oga is True %}
+                            <li class="active">
+                                <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i><span>Dashboard</span><i class=" pull-right"></i></a>
+                            </li>
+
+                            <li class="">
+                                <a href="#"><i class="fa fa-users"></i><span>Staff</span><i class="fa fa-angle-right pull-right"></i></a>
+                                <ul class="nav nav-sub">
+                                    <li class="nav-sub-header"><a href="#"><span>Staff</span></a></li>
+                                    {% if is_oga is True %}
+                                        <li><a href="{% url 'new_staff' %}"><span>New Staff</span></a></li>
+                                    {% endif %}
+                                    <li><a href="{% url 'all_staff' %}"><span>All Staff</span></a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                    <li class="">
+                        <a href="{% url 'staff_details' staff.facility_id staff.id %} "><i class="fa fa-user"></i><span>My Profile</span><i class=" pull-right"></i></a>
+                    </li>
+
+                    <li class="">
+                        <a href="#"><i class="fa fa-home"></i><span>Customers</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="nav nav-sub pl-3">
+                            <li class="nav-sub-header"><a href="#"><span>Customers</span></a></li>
+                            <li class="">
+                                <a href="{% url 'all_members' %}"><span>Members</span></a>
+                            </li>
+                            <li class="">
+                                <a href="{% url 'visiting_clients' %}"><span>Visitation Form</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="">
+                        <a href="{% url 'all_bookings' %}"><i class="fa fa-bookmark"></i><span>Bookings</span></a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'service_booking_list' %}"><i class="fa fa-bookmark"></i><span>All Services</span></a>
+                    </li>
+                    <li class="">
+                        <a href="{% url 'program_registered_list' %}"><i class="fa fa-support"></i><span>Programs</span></a>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-money"></i><span>E-Wallet</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="nav nav-sub">
+                            <li class="nav-sub-header"><a href="#"><span>E-Wallet</span></a></li>
+                            <li><a href="{% url 'credit_member' %}"><span>Credit Members E-Wallet</span></a></li>
+                            <li><a href="{% url 'all_credit' %}"><span>Recent Credit</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-globe"></i><span>Blog</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="nav nav-sub">
+                            <li class="nav-sub-header"><a href="#"><span>Blog</span></a></li>
+                            <li><a href="{% url 'new_post' %}"><span>New Blog</span></a></li>
+                            <li><a href="{% url 'post_list' %}"><span>All Blog Post</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-times-rectangle"></i><span>Testimonials</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="nav nav-sub">
+                            <li class="nav-sub-header"><a href="#"><span>Testimonials</span></a></li>
+                            <li><a href="{% url 'new_testimonial' %}"><span>New Testimonials</span></a></li>
+                            <li><a href="{% url 'testimonial_list' %}"><span>All Testimonials</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-check"></i><span>Client Logo</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="nav nav-sub">
+                            <li class="nav-sub-header"><a href="#"><span>Client Logo</span></a></li>
+                            <li><a href="{% url 'new_client_logo' %}"><span>New Client Logo</span></a></li>
+                            <li><a href="{% url 'client_logo_list' %}"><span>All Client Logo</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="fa fa-check"></i><span>Resource Center</span><i class="fa fa-angle-right pull-right"></i></a>
+                        <ul class="nav nav-sub">
+                            <li class="nav-sub-header"><a href="#"><span>Resource Center</span></a></li>
+                            <li><a href="{% url 'resource_list' 'video' %}"><span>Video File</span></a></li>
+                            <li><a href="{% url 'resource_list' 'doc' %}"><span>Document File</span></a></li>
+                            <li><a href="{% url 'resource_list' 'link' %}"><span>Resource Link</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="">
+                        <a href="{% url 'staff_log' %}"><i class="fa fa-archive"></i><span>Staff Activity Logs</span></a>
+                    </li>
+
+                    {% endif %}
+
+
+                    {% if user_type is 1 %}
+                        <li class="">
+                            <a href="{% url 'member_details' member_id %}"><i class="fa fa-user"></i><span>My Profile</span></a>
+                        </li>
+                        <li class="">
+                            <a href="{% url 'credit_self' %}"><i class="fa fa-money"></i><span>Credit Wallet</span></a>
+                        </li>
+                        <li class="">
+                            <a href="{% url 'my_booking' member_id %}"><i class="fa fa-bookmark"></i><span>My Bookings</span></a>
+                        </li>
+
+
+                        <li class="">
+                            <a href="#"><i class="fa fa-cogs"></i><span>My Services</span><i class="fa fa-angle-right pull-right"></i></a>
+                            <ul class="nav nav-sub">
+                                <li class="nav-sub-header"><a href="#"><span>Services</span></a></li>
+                                <li><a href="{% url 'select_service' %}"><i class="fa fa-cogs"></i><span>New Services</span></a></li>
+                                <li><a href="{% url 'service_booking_list' %}"><i class="fa fa-bookmark"></i><span>Booked Services</span></a></li>
+                            </ul>
+                         </li>
+                        <li class="">
+                            <a href="#"><i class="fa fa-cogs"></i><span>My Central Database</span><i class="fa fa-angle-right pull-right"></i></a>
+                            <ul class="nav nav-sub">
+                                <li class="nav-sub-header"><a href="#"><span>Services</span></a></li>
+                                <li><a href="{% url 'central_database_upload' %}"><i class="fa fa-cogs"></i><span>Upload New File</span></a></li>
+                                <li><a href="{% url 'central_database_list' member_id  %}"><i class="fa fa-bookmark"></i><span>View all Files</span></a></li>
+                            </ul>
+                         </li>
+                        <li class="">
+                            <a href="#"><i class="fa fa-check"></i><span>Resource Center</span><i class="fa fa-angle-right pull-right"></i></a>
+                            <ul class="nav nav-sub">
+                                <li class="nav-sub-header"><a href="#"><span>Resource Center</span></a></li>
+                                <li><a href="{% url 'resource_list' 'video' %}"><span>Video File</span></a></li>
+                                <li><a href="{% url 'resource_list' 'doc' %}"><span>Document File</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="">
+                            <a href="#"><i class="fa fa-globe"></i><span>Blog</span><i class="fa fa-angle-right pull-right"></i></a>
+                            <ul class="nav nav-sub">
+                                <li class="nav-sub-header"><a href="#"><span>Blog</span></a></li>
+                                <li><a href="{% url 'new_post' %}"><span>New Blog</span></a></li>
+                                <li><a href="{% url 'post_list' %}"><span>All Blog Post</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="">
+                            <a href="#"><i class="fa fa-times-rectangle"></i><span>Testimonials</span><i class="fa fa-angle-right pull-right"></i></a>
+                            <ul class="nav nav-sub">
+                                <li class="nav-sub-header"><a href="#"><span>Testimonials</span></a></li>
+                                <li><a href="{% url 'new_testimonial' %}"><span>New Testimonials</span></a></li>
+                                <li><a href="{% url 'testimonial_list' %}"><span>All Testimonials</span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="">
+                            <a href="{% url 'view_my_web_space' member_id %}"><i class="fa fa-building"></i><span>Web Space</span></a>
+                        </li>
+                    {% endif %}
+
+
+{#                    <li class="">#}
+{#                        <a href="https://www.enterprisehubs.com/forum" target="_blank"><i class="fa fa-forumbee"></i><span>Enterprise Hubs Community</span><i class="pull-right"></i></a>#}
+{#                    </li>#}
+                    <li class="">
+                        <a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i><span>Logout</span><i class=" pull-right"></i></a>
+                    </li>
+
+                </ul>
+            </aside>
+            <!--sidebar end-->
+
+            {% if messages %}
+                {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <span style="margin-left: 10px">{{ message }}</span>
+                        </div>
+                {% endfor %}
+            {% endif %}
+            {% if user_type is 2 or member_status is True %}
+                {% block page_content %}
+                <!--main content start-->
+                    <hi>Please create a block with page_content and start coding :) </hi>
+                <!--main content end-->
+                {% endblock page_content %}
+            {% else %}
+                 <div class="">
+                    <div class="sign-container lock-bg">
+                        <div class="text-center">
+                           <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"></span></button>
+                                <span style="margin-left: 10px; font-weight: bolder; font-size: 20px">Account In-Active!</span><br />
+                                <span style="margin-left: 10px">You Enterprise Hubs account is not active <br />
+                                    <strong>Note:</strong> New members account might take upto 24 hours for activation<br />
+                                    {% if member_id %}
+                                        <a href="{% url 'member_account' member_id %}" style="color: blue">click to renew your account</a>
+                                    {% endif %}
+                                </span><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <!--footer start-->
+            <div id="loading"></div>
+            <div id="footer" class="ui-footer">
+                <!--2018 &copy; Enterprise Hubs. Developed by ideaThinkers-->
+                <script>
+                   let  date = new Date();
+                    document.write(date.getFullYear() + "&copy; Enterprise Hub. Developed by ideaThinkers")
+              </script>
+            </div>
+            <!--footer end-->
+
+        </div>
+
+        <!-- inject:js -->
+        <script src="{% static 'backend/bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/autosize/dist/autosize.min.js' %}"></script>
+        <!-- endinject -->
+
+        <!--horizontal-timeline-->
+        <script src="{% static 'backend/assets/js/horizontal-timeline/js/jquery.mobile.custom.min.js' %}"></script>
+        <script src="{% static 'backend/assets/js/horizontal-timeline/js/main.js' %}"></script>
+
+        <!-- Common Script   -->
+        <script src="{% static 'backend/dist/js/main.js' %}"></script>
+        <script>
+            $(document).on('click', '.confirm', function(){
+            return confirm('This action is irrevocable. Are you sure you want to proceed?');
+            });
+
+            $(document).on('click', '.confirm_revert', function(){
+            return confirm('You are about to revert this transaction. Transaction will be pulled out from Sagamy ' +
+                'Software and member balance depleted, bur your actions and transaction details will be logged');
+            });
+
+             $(document).on('click', '.confirm-deactivate', function(){
+            return confirm('You are about to disapprove, Are you sure you want to proceed?');
+            });
+
+            $(document).on('click', '.confirm-activate', function(){
+            return confirm('You are about approve, Are you sure you want to proceed?');
+             });
+
+            $(document).on('click', '.confirm-delete', function(){
+            return confirm('You are about to delete some sensitive information, Are you sure you want to proceed?');
+             });
+            $(document).on('click', '.confirm-request', function(){
+            return confirm('This action would automatically notify Enterprise Hubs of your intention to build a web-space. Proceed?');
+             });
+            function onReady(callback) {
+                  var intervalId = window.setInterval(function() {
+                    if (document.getElementsByTagName('body')[0] !== undefined) {
+                      window.clearInterval(intervalId);
+                      callback.call(this);
+                    }
+                  }, 1000);
+                }
+
+                function setVisible(selector, visible) {
+                  document.querySelector(selector).style.display = visible ? 'block' : 'none';
+                }
+
+                onReady(function() {
+                  setVisible('.page', true);
+                  setVisible('#loading', false);
+                });
+        </script>
+
+        {% block JS  %}
+
+        {% endblock JS %}
+
+
+    </body>
+</html>

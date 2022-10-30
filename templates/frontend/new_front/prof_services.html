@@ -1,0 +1,104 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+
+        <div class="page-title-area" style="background-image: url({% static 'new_front/assets/images/services/service_4.jpg' %})">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>We provide a suite of
+                                professional services
+                                to support your business
+                            </h2>
+                            <ul>
+                                <li>We're entrepreneurs like you. We know what your business needs to enable you succeed.
+                                    We provide a full range of professional services at flexible cost on demand.
+                                    Please select your preferences from the options below.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <span style="margin-left: 10px">{{ message }}</span>
+                    </div>
+            {% endfor %}
+        {% endif %}
+
+        <section class="services-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    {% for item in prof_services %}
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="single-services-box">
+                            <div class="icon">
+                                <img src="https://enterprisehubs.com{{ item.image.url }}">
+                            </div>
+                            <h3><a href="#">{{ item.name }}</a></h3>
+                            <p>{{ item.body }}</p>
+                            <a href="#" class="btn btn-danger text-white" data-toggle="modal" data-target="#serviceBooking{{ item.id }}">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="modal fade" id="serviceBooking{{ item.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Thank you for your interest in our {{ item.name }} back office service.</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                             <p>Please provide your name and email address and we will get back to you shortly.</p>
+                              <form method="post" action="{% url 'post_service' item.name %}">
+                                  {% csrf_token %}
+                                  <div class="form-group">
+                                    <input class="form-control" type="text" name="name" placeholder="Name" required />
+                                      <br />
+                                    <input class="form-control" type="text" name="phone" placeholder="Phone" required />
+                                      <br />
+                                    <input class="form-control" type="email" name="email" placeholder="Email" required />
+                                  </div>
+                                  <button type="submit" class="btn btn-success float-right">Submit</button>
+                              </form>
+                               <br /><br />
+                                <p class="text-success">Want to skip the wait?</p>
+                                <p>Contact us through any of the phone numbers provided below</p>
+                                <a href="tel:+2349060009685">+2349060009685</a> <br />
+                                <a href="tel:+2349060009685">+2349060009684</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+
+         <div class="feedback-area ptb-100 bg-f8f8f8">
+            <div class="container">
+                <div class="feedback-slides owl-carousel owl-theme">
+                    {% for item in testimonial %}
+                        <div class="single-feedback-item">
+                            <p>{{ item.content|safe }}</p>
+                            <div class="client">
+                                {{ item.name }}<br />
+                                {{ item.company }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+{% endblock main %}

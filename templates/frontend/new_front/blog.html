@@ -1,0 +1,42 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+        <div class="page-title-area" style="background-image: url({% static 'new_front/assets/images/blog.jpg' %})">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>News Grid</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>News Grid</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="blog-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    {% for blog in object_list %}
+                        <div class="col-lg-4 col-md-6">
+                            <div class="single-blog-post">
+                                <div class="post-image">
+                                    <a href="#"><img src="https://enterprisehubs.com{{ blog.image.url }}" alt="image" /></a>
+                                    <div class="date"><i class="flaticon-calendar"></i> {{ blog.date|date }}</div>
+                                </div>
+                                <div class="post-content">
+                                    <h3><a href="#">{{ blog.title }}</a></h3>
+                                    <p>{{ blog.content|truncatewords_html:20|safe }}</p>
+                                    <a href="{% url 'blog_details' blog.slug %}" class="default-btn">Read More <span></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+{% endblock main %}

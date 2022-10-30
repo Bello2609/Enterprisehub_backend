@@ -1,0 +1,106 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+
+        <div class="page-title-area" style="background-image: url({% static 'new_front/assets/images/services.jpg' %})">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>Services</h2>
+                            <ul>
+                                <li><a href="{% url 'home_page' %}">Home</a></li>
+                                <li>Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-services-box">
+                            <div class="icon">
+                                <img style="max-height: 150px" src="{% static 'new_front/assets/images/services/service_2.jpg' %}">
+                            </div>
+                            <h3><a href="#">Office Space</a></h3>
+                            <p>We have state of the art office spaces to cater for your needs</p>
+                            <a href="{% url 'guest_booking' %}" class="btn btn-danger text-white">Book Now</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-services-box">
+                            <div class="icon">
+                                <img style="max-height: 150px" src="{% static 'new_front/assets/images/services/services-5.png' %}">
+                            </div>
+                            <h3><a href="#">Virtual Office</a></h3>
+                            <p>Take control of your business, by having a business address in the heart of Lagos Nigeria.</p>
+                            <a href="{% url 'register_member' %}" class="btn btn-danger text-white">Book now</a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-services-box">
+                            <div class="icon">
+                                <img style="max-height: 150px" src="{% static 'new_front/assets/images/services/service_4.jpg' %}">
+                            </div>
+                            <h3><a href="#">Professional Services</a></h3>
+                            <p>We support entrepreneurs, by offering professional services at a reduced cost</p>
+                            <a href="{% url 'prof_services' %}" class="btn btn-danger text-white">Learn More</a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-services-box">
+                            <div class="icon">
+                                <img style="max-height: 150px" src="{% static 'new_front/assets/images/services/service_3.jpg' %}">
+                            </div>
+                            <h3><a href="#">Training Programs</a></h3>
+                            <p>Get involve, and participate in our training programs.</p>
+                            <a href="mailto:info@enterprisehubs.com?cc=dozie@pedestalafrica.com&subject=Enterprise Hubs Training Programs&body=Hi <your_name>, %0D%0D I will like to know more about your training programs %0D%0D Thanks" class="btn btn-danger text-white">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+        <div class="modal fade" id="trainingPrograms" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Training programs</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                 <p>Periodically, we organise training programs, be among the first to know about the next training program.</p>
+                 <p>Subscribe to our newsletter</p>
+                  <form>
+                      <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Name" required />
+                          <br />
+                        <input class="form-control" type="email" placeholder="Email" required />
+                      </div>
+                      <button type="submit" class="btn btn-success text-center">Subscribe</button><br />
+                      <small class="text-black-50">We promise we do not spam :)</small>
+                  </form>
+                   <br /><br />
+
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+{% endblock main %}

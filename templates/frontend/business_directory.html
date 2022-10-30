@@ -1,0 +1,83 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+       {% block page_content %}
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+            {% if search %}
+                <div class="banner-area about-us" style="background-image: url({% static 'img/slider/6.jpeg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>Search</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li>Gallery</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+                <!-- banner end -->
+
+                <!-- creative area start -->
+                <div class="creative-area marg-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title">
+                                    <h2>Business Directory / <span>listings</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% for listing in listings %}
+                                <div class="col-md-4" style="margin-bottom: 15px">
+                                    <div class="single-member">
+                                        <div class="single-member-img">
+                                            {% if listing.image %}
+                                            <a href="{% url 'member_web_space' listing.slug %}"><img src="{{ listing.image.url }}" alt=""></a>
+                                            {% else %}
+                                            <a href="{% url 'member_web_space' listing.slug %}"><img src="https://via.placeholder.com/594x1032" alt=""></a>
+                                            {% endif %}
+                                        </div>
+                                        <div class="single-member-info text-center">
+                                            <div class="single-member-info-wrapper">
+                                                <a href="{% url 'member_web_space' listing.slug %}" style="color: whitesmoke"><h5>{{ listing.business_name }}</h5></a>
+                                                <p>{{ listing.phone }}</p>
+                                            </div>
+                                            <div class="single-member-social" >
+                                                <ul>
+                                                    <li><a href="{{ listing.facebook }}"><i style="color: whitesmoke" class="fa fa-facebook"></i></a></li>
+                                                    <li><a href="{{ listing.instagram }}"><i style="color: whitesmoke" class="fa fa-instagram"></i></a></li>
+                                                    <li><a href="{{ listing.linkedin }}"><i style="color: whitesmoke" class="fa fa-linkedin"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if search %}
+                                    {% if forloop.counter < 1 %}
+                                        <h3>We couldn't find a business that matches your search word</h3>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- creative area end -->
+
+            </div>
+        </div>
+        {% endblock page_content %}
+
+

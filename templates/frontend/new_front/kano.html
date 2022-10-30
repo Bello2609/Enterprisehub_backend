@@ -1,0 +1,48 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{#{% block logo %} <img width="250" src="{% static 'new_front/assets/images/' %}"  alt="logo"/> {% endblock %}#}
+{#{% block mini_logo %} <img width="400" src="{% static 'new_front/assets/images/qsc1.png' %}"  alt="logo"/> {% endblock %}#}
+
+{% block main %}
+        <div class="page-title-area item-bg3" style="background-color: #252525">
+{#        <div class="page-title-area item-bg3" style="background-image: url({% static 'new_front/assets/images/about_us.jpg' %})">#}
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>Welcome to Enterprise Hubs Kano</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="services-details-area ptb-100">
+            <div class="container">
+                <div class="services-details-overview">
+                    <div class="services-details-desc">
+                        <img src="" />
+                        <h3>Enterprise Kano GRA</h3>
+                        <p style="text-align: justify">
+                        Enterprise Hubs Kano GRA offers a range of cozy workspaces in the ancient commercial city of Kano.
+                            Conveniently located in the serene Tarauni GRA, Enterprise Hubs is pioneering flexible workspace
+                            and coworking in Kano, offering the same impeccable standards as its flagship location in Victoria Island Lagos.
+
+                        </p>
+                        <p>This easily accessible spot boasts private offices, coworking lounge, meeting rooms and dedicated desks, plus a huge parking garden.
+We also offer virtual office service giving you a prestigious address without the hassle of leasing and managing one yourself. Our virtual office service here is synchronized with Lagos and Abuja centers, giving you the option of functional addresses in the top 3 cities in Nigeria.
+Our digital portal allows you to search, select, book, and pay for spaces and services from the comfort of your device.</p>
+                    </div>
+                    <div class="services-details-image">
+                        <img src="https://enterprisehubs.com/media/WhatsApp_Image_2021-07-12_at_19.04.07.jpeg" alt="image" />
+                    </div>
+                </div>
+                <div>
+                    <a href="{% url 'guest_booking' %}" class="btn btn-danger text-white">Get Started</a>
+                </div>
+
+            </div>
+        </section>
+
+{% endblock main %}

@@ -1,0 +1,60 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+       {% block page_content %}
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+               <div class="banner-area about-us" style="background-image: url({% static 'img/slider/6.jpeg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>Careers</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li>Careers</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- creative area start -->
+                <div class="creative-area marg-100 text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="default-title">
+                                    <h2>We are Hiring <span></span></h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h3>Pedestal Africa Limited owner of Enterprise Hubs is looking for talented and skilled people to join our team </h3>
+                            <ol style="font-weight: bolder;" type="1">
+                                <li>1. Financial Accountant</li>
+                                <li>2. Consultant analyst/ researchers </li>
+                                <li>3. Marketing Associate </li>
+                                <li>4. Interns (under/ post graduate)</li>
+                                <li>5. N.Y.S.C</li>
+                            </ol>
+                            <br />
+                            <br />
+                            <p>To apply simply send your CV to <a href="mailto:careers@pedestalafrica.com">careers@pedestalafrica.com</a>  <br /> <br />
+                                Use the position you are applying for as the subject of the mail.</p><br />
+
+                        </div>
+                    </div>
+                </div>
+                <!-- creative area end -->
+
+            </div>
+        </div>
+        {% endblock page_content %}
+
+

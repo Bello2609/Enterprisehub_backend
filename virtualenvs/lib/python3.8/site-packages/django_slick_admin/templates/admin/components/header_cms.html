@@ -1,0 +1,65 @@
+{% load i18n %}
+{% load static from static %}
+
+<div id="header-logo">
+    <a class="icon-logo" href="/"><span>django CMS</span></a>
+</div>
+
+<h1>{{ site_header|default:_('Django Administration') }}</h1>
+
+<ul id="site-name" class="toolbar-item toolbar-item-navigation">
+    <li>
+        <a class="menu-item" href="">{{ site_header|default:_('Django Administration') }}</a>
+        <ul class="submenu">
+            {% if user.is_active and user.is_staff %}
+            {% url 'django-admindocs-docroot' as docsroot %}
+            {% if docsroot %}
+            <li>
+                <a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
+            </li>
+            <li class="toolbar-item-navigation-break">-----</li>
+            {% endif %}
+            {% endif %}
+            {% if user.has_usable_password %}
+            <li>
+                <a href="{% url 'admin:password_change' %}">{% trans 'Change password' %}</a>
+            </li>
+            <li class="toolbar-item-navigation-break">-----</li>
+            {% endif %}
+            <li>
+                <a href="{% url 'admin:logout' %}">
+                    <span>{% trans 'Log out' %} {% firstof user.get_short_name user.get_username %}</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+
+{% block language_chooser %}
+    <!--
+    {% if LANGUAGES|length > 1 %}
+        <div id="language-chooser" style="display: inline;">
+            <div class="language-chooser-inner" style="display: inline; line-height: 48px; padding-left: 24px;">
+                <span class="label">{% trans 'Backend Sprache' %}:</span>
+                {% for lang in LANGUAGES %}
+                <a href="/{{ lang.0 }}{{ request.get_full_path|slice:'3:' }}" class="button {% ifequal lang.0 request.LANGUAGE_CODE %} active{% endifequal %}">
+                    {% ifequal lang.0 request.LANGUAGE_CODE %}{{ lang.1 }}{% else %}{{ lang.1 }}{% endifequal %}
+                </a>
+
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    -->
+{% endblock %}
+
+<div id="header-btn">
+    <a href="/" class="icon-arrow-right btn js-header-link">
+        {% trans 'Open' %} {{ request.site.name|default:_('my site') }}
+    </a>
+</div>
+
+<script>
+    var slick_admin_mode = 'cms';
+</script>
+<script src="{% static 'django_slick_admin/js/base.js' %}"></script>

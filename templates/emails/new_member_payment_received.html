@@ -1,0 +1,53 @@
+{% load humanize %}
+
+{% if type == 'member' %}
+<p>Hi {{ user }}</p> <br />
+
+<p>Payment of NGN{{ amount|intcomma }} was received.</p>
+
+<p>Your account will be activated within 24 hours.</p>
+
+</p>
+
+{% elif type == 'staff' %}
+
+<p>Hi Team, </p>
+
+<p>A new member ({{ member }}) ID #{{ member_id }} just paid for membership activation,
+Kindly process his membership.</p>
+
+
+{% elif type == 'account_renewal' %}
+
+<p>Hi member, </p>
+
+<p>The renewal of your Enterprise Hubs Membership account was successful.</p>
+
+<p>You account has been activated.</p>
+
+<p><strong>Amount Paid: NGN{{ amount|intcomma }} </strong> </p>
+<p><strong>Membership Type: {{ account }} </strong> </p>
+<p><strong>Expiring Date {{ next_p_date|date }} </strong> </p>
+
+
+{% elif type == 'credit_self' %}
+
+<p>Hi {{ member }}, </p>
+
+<p>Your Enterprise Hubs Wallet was credited. See details below</p>
+
+<p><strong>Amount Paid: NGN{{ amount|intcomma }} </strong> </p>
+<p><strong>Wallet Balance NGN{{ wallet_balance|intcomma }} </strong> </p>
+
+
+{% elif type == 'reversed_credit' %}
+<p> Hi {{ member }}</p>
+
+<p>A credit Transaction with ID #{{ credit_id }} was reversed.</p>
+<p>You new wallet balance is NGN{{ wallet_balance|intcomma }}</p>
+
+{% endif %}
+
+<p>Thanks</p>
+
+<p>Enterprise Hubs Team</p>

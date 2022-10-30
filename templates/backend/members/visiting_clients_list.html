@@ -1,0 +1,180 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+
+{% block title %}Enterprise Hubs - Admin Portal {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/jquery.steps/demo/css/jquery.steps.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/select2/dist/css/select2.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <!--page header start-->
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        FrontDesk Device Data {% if filter_to %}- {{ filter_from|date }} to {{ filter_to|date }}{% endif %}
+                    </h4>
+                    <div class="breadcrumb-right hidden-sm hidden-xs">
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">Visiting List </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="margin-top: 20px">
+                <p id="export_success"></p>
+                    <form class="form-group" method="GET" enctype="text/plain">
+                        <div class="col-lg-3">
+                            <div class="input-group date data-date=" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input required type="text" name="filter_from" class="form-group form-control input-height datepicker" placeholder="From date" id="filter_from">
+                                 <span style="max-width: 40px"  class="input-group-addon bg-danger text-white">
+                                     <i class="glyphicon glyphicon-th fa fa-calendar"></i>
+                                 </span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+{#                            <label for="email" class="control-label col-lg-12">Book-To </label>#}
+                            <div class="input-group date data-date=" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input required type="text" name="filter_to" class="form-group form-control input-height datepicker" placeholder="To date" id="filter_to">
+                                 <span style="max-width: 40px"  class="input-group-addon bg-danger text-white">
+                                     <i class="glyphicon glyphicon-th fa fa-calendar"></i>
+                                 </span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success">Filter</button>
+                    <form>
+                    <a href="{% url 'generate_sheet' filter_from|date:"Y-m-d" filter_to|date:"Y-m-d" 'visitors' %}">
+                        <button id="export" type="button" class="export btn btn-primary">
+                            <i class="fa fa-file-excel-o"></i> Export Data
+                        </button>
+                    </a>
+                <!--page header end-->
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <section class="panel">
+
+                                    <div class="panel-body table-responsive">
+                                        <table class="table convert-data-table table-striped">
+                                            <thead>
+                                                <tr class="text-center">
+                                                    <th>
+                                                        S/N
+                                                    </th>
+                                                    <th>
+                                                        Name
+                                                    </th>
+                                                    <th>
+                                                        Phone
+                                                    </th>
+                                                    <th>
+                                                        Email
+                                                    </th>
+                                                    <th>
+                                                        Business Name
+                                                    </th>
+                                                    <th>
+                                                        To see
+                                                    </th>
+                                                    <th>
+                                                        Purpose
+                                                    </th>
+                                                    <th>
+                                                        Date
+                                                    </th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for item in object_list %}
+                                                <tr>
+                                                    <td>
+                                                         {{ forloop.counter }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.name }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.phone }}
+                                                    </td>
+                                                    <td>
+                                                         {{ item.email }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.business_name }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.whom_to_see }}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.purpose}}
+                                                    </td>
+                                                    <td>
+                                                        {{ item.date }}
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+                </div>
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block Chart_JS %}
+
+{% endblock Chart_JS %}
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+        <script>
+        $('.input-group.date').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            allowClear: true,
+            daysOfWeekDisabled: [0]
+
+        });
+        </script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $('.export').click(function () {
+              console.log('Testing click function');
+              $.ajax({
+                url: '',
+                success: function () {
+                  $(this).html('Generating file');
+                },
+              });
+            });
+        });
+        </script>
+
+{% endblock JS %}

@@ -1,0 +1,62 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+       {% block page_content %}
+            <div class="main-content-wrapper">
+                <!-- banner start -->
+                <div class="banner-area about-us" style="background-image: url({% static 'img/slider/slide1.jpg' %})">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="banner-text text-center">
+                                    <div class="banner-title">
+                                        <h2>Upcoming Programs</h2>
+                                    </div>
+                                    <div class="breadcrumbs">
+                                        <ul>
+                                            <li><a href="{% url 'home_page' %}">Home</a>></li>
+                                            <li>programs</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- banner end -->
+
+                <!-- creative area start -->
+                <div class="creative-area marg-100">
+                    <div class="container">
+{#                        <div class="row">#}
+{#                            <div class="col-xs-12">#}
+{#                                <div class="default-title">#}
+{#                                    <h2>Upcoming Programs <span></span></h2>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+                        <div class="row">
+                            {% for program in object_list  %}
+                                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                                    <div class="single-member">
+                                        <div class="single-member-img">
+                                            <a href="{% url 'program_register' program.slug program.id %}"><img src="{{ program.image.url }}" alt="{{ program.name }}"></a>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                    <p style="margin-top: 5px; font-size: 20px">{{ program.name }}</p>
+                                        <p>{{ program.start_date|date }} - {{ program.end_date|date }}</p>
+                                        <a href="{% url 'program_register' program.slug program.id %}"><button class="btn btn-success">Register</button></a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- creative area end -->
+
+            </div>
+        </div>
+        {% endblock page_content %}
+
+

@@ -1,0 +1,96 @@
+{% extends 'frontend/ui_base.html' %}
+{% load static %}
+
+{% block page_title %}
+    <title>Welcome to Enterprise Hubs. </title>
+{% endblock page_title %}
+
+{% block add_css %}
+    <style>
+     .modal-body p {
+         font-family: initial;
+         text-align: center;
+     }
+    .box {
+        width: 200px;
+        height: 171px;
+        border: 2px solid #80C165;
+        border-radius: 20px;
+        padding: 40px;
+        margin: 15px;
+        font-weight: bolder;
+    }
+    .box:hover {
+        color: white;
+        background-color: #80C165;
+    }
+    .box:hover p{
+        text-align: center;
+        color: white;
+    }
+    </style>
+{% endblock add_css %}
+
+{% block header %} {% endblock %}
+{% block page_content %}
+
+    <div class="main-content-wrapper">
+        <div class="about-reflex-area ptb-100 bg-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 text-center" style="margin-top: -58px; padding-bottom: 20px; border: 1px solid black; border-radius: 10px">
+                        <div class="about-reflex-info bg-white">
+                            <h2 style="background-color: #F0E661; padding: 10px; margin-right: -15px; margin-left: -15px; border-radius: 10px">What do you need today?</h2>
+                            <div class="col-md-12">
+                                <a href="#">
+                                    <div class="col-sm-3 box">
+                                        <p>Office Space</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="col-sm-3 box">
+                                        <p>Virtual Office</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="col-sm-3 box">
+                                        <p>Entrepreneurship & Training Program</p>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="col-sm-3 box">
+                                        <p>Back Office & Professional Services</p>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-md-4 col-md-offset-4" style="margin-top: 50px">
+                                <h4>Download our free e-book</h4>
+                                <form action="#" method="post">
+                                    {% csrf_token %}
+                                    <div style="margin-top: 20px">
+                                        <input class="form-control" type="email" placeholder="Email" />
+                                    </div>
+                                    <div style="margin-top: 10px">
+                                        <button type="submit" class="btn btn-success">Download Now!</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock page_content %}
+
+{% block add_js %}
+
+{% endblock add_js %}
+
+{% block footer %} {% endblock %}
+
+
+

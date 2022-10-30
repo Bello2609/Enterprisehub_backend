@@ -1,0 +1,63 @@
+{% extends 'frontend/new_front/base.html' %}
+{% load static %}
+
+{% block main %}
+        <div class="page-title-area" style="background-image: url({% static 'new_front/assets/images/blog.jpg' %})">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="page-title-content">
+                            <h2>News Details</h2>
+                            <ul>
+                                <li><a href="index.html">Home</a></li>
+                                <li>News Details</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="blog-details-area ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="blog-details-desc">
+                            <div class="article-image">
+                                <img src="https://enterprisehubs.com{{ object.image.url }}" alt="image" />
+                            </div>
+                            <div class="article-content">
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li><span>Posted On:</span> <a href="#">{{ object.date|date }}</a></li>
+                                        <li><span>Posted By:</span> <a href="#">{{ object.user.get_full_name }}</a></li>
+                                    </ul>
+                                </div>
+                                <h3>{{ object.title }}</h3>
+                                <p>{{ object.content|safe }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <aside class="widget-area" id="secondary">
+                            <section class="widget widget_zash_posts_thumb">
+                                <h3 class="widget-title">Latest post</h3>
+                                {% for item in latest_blog %}
+                                    <article class="item">
+                                        <a href="#" class="thumb">
+                                            <img src="https://enterprisehubs.com{{ item.image.url }}" />
+                                        </a>
+                                        <div class="info">
+                                            <time datetime="2019-06-30">{{ item.date|date }}</time>
+                                            <h4 class="title usmall"><a href="{% url 'blog_details' item.slug %}">{{ item.title }}</a></h4>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </article>
+                                {% endfor %}
+                            </section>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </section>
+{% endblock main %}

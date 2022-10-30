@@ -1,0 +1,365 @@
+{% extends 'backend/backend_base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}Enterprise Hubs - Dashboard {% endblock title %}
+{% block CSS %}
+        <!--Data Table-->
+        <link href="{% static 'backend/bower_components/datatables/media/css/jquery.dataTables.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-tabletools/css/dataTables.tableTools.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-colvis/css/dataTables.colVis.css' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-responsive/css/responsive.dataTables.scss' %}" rel="stylesheet">
+        <link href="{% static 'backend/bower_components/datatables-scroller/css/scroller.dataTables.scss' %}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static 'backend/bower_components/jquery.steps/demo/css/jquery.steps.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/select2/dist/css/select2.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css' %}">
+
+ {% endblock CSS %}
+
+            {% block page_content %}
+            <!--main content start-->
+
+            <div id="content" class="ui-content">
+                <div class="page-head-wrap">
+                    <h4 class="margin0">
+                        {% if user_type is 2 %}
+                        {{ object.first_name }} {{ object.last_name }} - Member since {{ object.date_joined|timesince }} ago
+                        {% else %}
+                        Hi, {{ object.username }}
+                        {% endif %}
+                    </h4>
+                    <div class="breadcrumb-right hidden-xs hidden-sm">
+                        {% if user_type is 2 and not object.is_active %}
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                  Override Membership Type
+                                </button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Overiding Membership Payment of <br /> {{ object.first_name }} {{ object.last_name }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                          <span aria-hidden="true">&times;</span>
+                                        </button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <form method="post" action="{% url 'manual_override' object.member_id %}">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <input class="form-control" name="amount" type="number" placeholder="Enter Amount" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control" name="pay_mode" required>
+                                                    <option value="">Please select</option>
+                                                    <option value="1">P.O.S</option>
+                                                    <option value="2">Transfer</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group date data-date=" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                                <input class="form-control input-height datepicker" name="expiry_date" placeholder="Pick a date" required>
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-th fa fa-calendar"></i></span>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary confirm">Submit</button>
+                                              </div>
+                                        </form>
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="ui-content-body">
+                    <div class="ui-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="panel profile-wrap">
+{#                                    <header class="panel-heading clearfix">#}
+{#                                        <h3 class="profile-title pull-left">{{ object.first_name }} {{ object.last_name }} Profile</h3>#}
+{#                                    </header>#}
+                                    <div class="panel-body row">
+                                        <div class="col-md-4">
+                                            <div class="profile-thumb">
+                                                {% if object.image  %}
+                                                    <img src="{{ object.image.url }}" alt=""/>
+                                                {% else %}
+                                                    <img src="{% static 'img/team/avatar.jpg' %}" alt=""/>
+                                                {% endif %}
+                                            </div>
+
+                                            <div class="profile-info">
+                                                <h5>Contact Information</h5>
+                                                <ul class="list-unstyled">
+                                                    <li>
+                                                        <i class="fa fa-headphones"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">Username</span>
+                                                            {{ object.username }}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-headphones"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">Mobile Number</span>
+                                                            {{ object.phone }}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-envelope-o"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">E-mail</span>
+                                                            {{ object.email }}
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-map-marker"></i>
+                                                        <div class="p-i-list">
+                                                            <span class="text-muted">Address</span>
+                                                           {{ object.address }}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                {% if object.cac %}
+                                                    <a href="{{ object.cac.url }}" class="btn btn-danger" target="_blank">CAC DOC</a>
+                                                {% endif %}
+                                                <a href="{{ object.valid_id.url }}" class="btn btn-success" target="_blank">ID CARD</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-8">
+
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="panel short-states" style="background: #fff100">
+                                                    <div class="pull-right state-icon">
+                                                        <i class="fa fa-money" style="font-size: 20px"></i>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <h1 class="light-txt" style="font-size: 20px; color: black">{{ total_credit|intcomma }}</h1>
+                                                        <div class=" pull-right"><i class="fa fa-level-up"></i></div>
+                                                        <strong class="text-uppercase">TOTAL CREDIT</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="panel short-states bg-danger">
+                                                    <div class="pull-right state-icon">
+                                                        <i class="fa fa-money" style="font-size: 20px; color: #000000"></i>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <h1 class="light-txt" style="font-size: 20px; color: black">{{ wallet_balance|intcomma }}</h1>
+                                                        <div class=" pull-right" style="color: black"><i class="fa fa-level-up"></i></div>
+                                                        <strong class="text-uppercase" style="color: black">WALLET BALANCE</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-6">
+                                                <div class="panel short-states" style="background: #87c550">
+                                                    <div class="pull-right state-icon">
+                                                        <i class="fa fa-address-book" style="font-size: 20px; color: #000000"></i>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <h1 class="light-txt" style="font-size: 20px; color: #000000">{{ bookings|intcomma }}</h1>
+                                                        <div class=" pull-right" style="color: #000000"><i class="fa fa-level-up"></i></div>
+                                                        <strong class="text-uppercase" style="color: #000000">ALL BOOKING(S)</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <div class="profile-tabs">
+                                                <ul class="nav nav-tabs">
+                                                    <li class="active"><a href="#tab1"data-toggle="tab">Recent Credit</a></li>
+                                                    <li class=""><a href="#tab2"data-toggle="tab">Recent Debit</a></li>
+                                                    <li class=""><a href="#tab3"data-toggle="tab">Recent Bookings</a></li>
+                                                </ul>
+                                                <div class="tab-content">
+                                                    <div id="tab1" class="tab-pane fade in active">
+                                                        <div class="panel-body table-responsive">
+                                                        {% if recent_credit %}
+                                                            <table class="table convert-data-table table-striped">
+                                                                <thead>
+                                                                    <tr class="text-center">
+                                                                        <th>
+                                                                            #ID
+                                                                        </th>
+                                                                        <th>
+                                                                            Date
+                                                                        </th>
+                                                                        <th>
+                                                                            Amount
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for credit in recent_credit %}
+                                                                    <tr>
+                                                                        <td>
+                                                                             #{{ credit.trans_id }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ credit.date|date }}
+                                                                        </td>
+                                                                        <td>
+                                                                            ₦ {{ credit.amount|intcomma }}
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        {% else %}
+                                                            <h3>Nothing Yet</h3>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div id="tab2" class="tab-pane fade in">
+                                                        <div class="panel-body table-responsive">
+                                                        {% if recent_debit %}
+                                                            <table class="table convert-data-table table-striped">
+                                                                <thead>
+                                                                    <tr class="text-center">
+                                                                        <th>
+                                                                            #ID
+                                                                        </th>
+                                                                        <th>
+                                                                            Date
+                                                                        </th>
+                                                                        <th>
+                                                                            Remark
+                                                                        </th>
+                                                                        <th>
+                                                                            Amount
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for debit in recent_debit %}
+                                                                    <tr>
+                                                                        <td>
+                                                                             #{{ debit.trans_id }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ debit.date|date }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ debit.remarks }}
+                                                                        </td>
+                                                                        <td>
+                                                                            ₦ {{ debit.amount|intcomma }}
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        {% else %}
+                                                            <h3>Nothing Yet</h3>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                    <div id="tab3" class="tab-pane fade in">
+                                                        <div class="panel-body table-responsive">
+                                                        {% if all_bookings %}
+                                                            <table class="table convert-data-table table-striped">
+                                                                <thead>
+                                                                    <tr class="text-center">
+                                                                        <th>
+                                                                            #ID
+                                                                        </th>
+                                                                        <th>
+                                                                            Facility
+                                                                        </th>
+                                                                        <th>
+                                                                            Unit
+                                                                        </th>
+                                                                        <th>
+                                                                            Book From
+                                                                        </th>
+                                                                        <th>
+                                                                            Book To
+                                                                        </th>
+                                                                        <th>
+                                                                            Amount Payable
+                                                                        </th>
+                                                                        <th>
+                                                                            Status
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                {% for item in all_bookings %}
+                                                                    <tr>
+                                                                        <td>
+                                                                             #{{ item.id }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ item.facility }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ item.unit }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ item.book_from }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {{ item.book_to }}
+                                                                        </td>
+                                                                        <td>
+                                                                            ₦{{ item.payable|intcomma }}
+                                                                        </td>
+                                                                        <td>
+                                                                            {% if item.is_hold is True and item.is_secured is False %}
+                                                                                <label class="label label-warning">pending</label>
+                                                                            {% elif item.is_hold is True and item.is_secured is True%}
+                                                                                <label class="label label-success">Secured</label>
+                                                                            {% elif item.is_hold is False %}
+                                                                                <label class="label label-danger">canceled</label>
+                                                                            {% endif %}
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        {% else %}
+                                                            <h3>Nothing Yet </h3>
+                                                        {% endif %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--main content end-->
+            {% endblock page_content %}
+
+{% block JS %}
+    <!--Data Table-->
+        <script src="{% static 'backend/bower_components/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+{#        <script src="{% static 'bower_components/datatables-tabletools/js/dataTables.tableTools.js' %}"></script>#}
+        <script src="{% static 'backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-colvis/js/dataTables.colVis.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-responsive/js/dataTables.responsive.js' %}"></script>
+        <script src="{% static 'backend/bower_components/datatables-scroller/js/dataTables.scroller.js' %}"></script>
+
+        <!--init data tables-->
+        <script src="{% static 'backend/assets/js/init-datatables.js' %}"></script>
+
+    <script src="{% static 'backend/bower_components/jquery-validation/dist/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-validation.js' %}"></script>
+    <script src="{% static 'backend/bower_components/select2/dist/js/select2.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-select2.js' %}"></script>
+    <script src="{% static 'backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'backend/assets/js/init-datepicker.js' %}"></script>
+
+{% endblock JS %}

@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="shortcut icon" type="image/png" href="/imgs/favicon.png" /> -->
+        <title>500 Internal Server Error - Enterprise Hubs</title>
+
+        <!-- inject:css -->
+        <link rel="stylesheet" href="{% static 'backend/bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/simple-line-icons/css/simple-line-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/weather-icons/css/weather-icons.min.css' %}">
+        <link rel="stylesheet" href="{% static 'backend/bower_components/themify-icons/css/themify-icons.css' %}">
+
+        <!-- Main Style  -->
+        <link rel="stylesheet" href="{% static 'backend/dist/css/main.css' %}">
+
+        <script src="{% static 'backend/assets/js/modernizr-custom.js' %}"></script>
+    <body>
+        <div class="sign-in-wrapper">
+            <div class="sign-container lock-bg">
+                <div class="text-center">
+                    <h1 class="error-txt">500</h1>
+                    <h3>Internal Server Error </h3>
+                    <p>Looks like Something went wrong. We apologize.
+                        You can go back to main page</p>
+                    <br/>
+                        <center><a href="#" onclick="goBack()" class="btn btn-info">Go Back</a></center>
+                </div>
+            </div>
+        </div>
+
+       <!-- inject:js -->
+        <script src="{% static 'backend/bower_components/jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/jquery.nicescroll/dist/jquery.nicescroll.min.js' %}"></script>
+        <script src="{% static 'backend/bower_components/autosize/dist/autosize.min.js' %}"></script>
+        <!-- endinject -->
+
+        <!-- Common Script   -->
+        <script src="{% static 'backend/dist/js/main.js' %}"></script>
+        <script>
+            function goBack() {
+              window.history.back();
+            }
+        </script>
+
+    </body>
+</html>
